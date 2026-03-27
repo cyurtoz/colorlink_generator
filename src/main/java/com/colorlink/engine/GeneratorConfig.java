@@ -38,7 +38,7 @@ public class GeneratorConfig {
     public static class Builder {
         int    rows, cols, colorCount;
         long   randomSeed         = System.currentTimeMillis();
-        int    maxAttempts        = 800;
+        int    maxAttempts        = 5000;
         int    minPathLength;
         double maxShortPathRatio  = 0.25;
         int    minEndpointDistance = 2;
