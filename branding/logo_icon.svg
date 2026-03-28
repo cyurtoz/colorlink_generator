@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Dark background with rounded corners -->
+  <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+
+  <!-- Path 1: Coral - L-shaped connection -->
+  <path d="M 140 120 L 140 320 Q 140 350, 170 350 L 370 350"
+    stroke="#E8785E" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="140" cy="120" r="38" fill="#E8785E"/>
+  <circle cx="370" cy="350" r="38" fill="#E8785E"/>
+
+  <!-- Path 2: Ocean - shorter L-shaped connection -->
+  <path d="M 290 120 L 290 230 Q 290 260, 320 260 L 390 260"
+    stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="290" cy="120" r="34" fill="#5B8FB9"/>
+  <circle cx="390" cy="260" r="34" fill="#5B8FB9"/>
+</svg>
