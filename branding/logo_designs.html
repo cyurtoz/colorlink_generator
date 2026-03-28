@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ColorLink 500 - Logo Designs</title>
+<title>ColorLink - Logo Variations</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -11,13 +11,12 @@
 
   body {
     background: #f7f5f2;
-    color: #2d2d2d;
     font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 60px 20px;
-    gap: 100px;
+    gap: 80px;
   }
 
   h1 {
@@ -26,263 +25,386 @@
     letter-spacing: 5px;
     text-transform: uppercase;
     color: #999;
-    margin-bottom: -60px;
   }
 
-  .design-label {
+  .section-label {
     font-size: 10px;
     font-weight: 400;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: #aaa;
-    margin-bottom: -60px;
+    margin-bottom: -40px;
   }
 
-  /*
-   * COLOR PALETTE (warm, muted, 4 core colors):
-   *   Coral:   #E8785E
-   *   Ocean:   #5B8FB9
-   *   Sage:    #6BAA75
-   *   Sand:    #D4A96A
-   */
-
-  /* ===================== DESIGN 1: Logomark + Wordmark ===================== */
-  .logo1-container {
+  .row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .logo1-icon {
-    width: 120px;
-    height: 120px;
-  }
-
-  .logo1-wordmark {
-    text-align: center;
-  }
-
-  .logo1-name {
-    font-weight: 600;
-    font-size: 36px;
-    letter-spacing: 3px;
-    color: #2d2d2d;
-  }
-
-  .logo1-sub {
-    font-weight: 300;
-    font-size: 14px;
-    letter-spacing: 6px;
-    color: #999;
-    margin-top: -2px;
-  }
-
-  /* ===================== DESIGN 2: Inline Logo ===================== */
-  .logo2-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .logo2-icon {
-    width: 64px;
-    height: 64px;
-  }
-
-  .logo2-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .logo2-name {
-    font-weight: 600;
-    font-size: 32px;
-    letter-spacing: 2px;
-    color: #2d2d2d;
-    line-height: 1;
-  }
-
-  .logo2-sub {
-    font-weight: 300;
-    font-size: 12px;
-    letter-spacing: 8px;
-    color: #aaa;
-    margin-top: 2px;
-  }
-
-  /* ===================== DESIGN 3: Dark variant ===================== */
-  .logo3-container {
-    width: 500px;
-    height: 240px;
-    background: #1e1e2a;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 60px;
+    align-items: flex-end;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
   }
 
-  .logo3-name {
-    font-weight: 600;
-    font-size: 36px;
-    letter-spacing: 3px;
-    color: #f0ece6;
-  }
-
-  .logo3-sub {
-    font-weight: 300;
-    font-size: 14px;
-    letter-spacing: 6px;
-    color: #666;
-    margin-top: -8px;
-  }
-
-  /* ===================== DESIGN 4: App icon only ===================== */
-  .logo4-row {
+  .variant {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
     align-items: center;
+    gap: 10px;
   }
 
-  .logo4-label {
-    font-size: 10px;
+  .variant-label {
+    font-size: 9px;
     font-weight: 400;
     letter-spacing: 3px;
     color: #bbb;
     text-transform: uppercase;
-    text-align: center;
-    margin-top: 10px;
   }
 
-  .icon-frame {
+  .icon-bg-light { background: #f7f5f2; }
+  .icon-bg-dark  { background: #1e1e2a; }
+  .icon-bg-warm  { background: #f0ece6; }
+
+  svg { border-radius: 22%; }
+
+  /* Wordmark section */
+  .wordmark-row {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .wordmark-text {
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #2d2d2d;
+  }
+
+  .wordmark-dark .wordmark-text {
+    color: #f0ece6;
+  }
+
+  .wordmark-dark {
+    background: #1e1e2a;
+    padding: 20px 36px;
+    border-radius: 14px;
+  }
+
+  /* Size test row */
+  .size-row {
+    display: flex;
+    gap: 30px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .size-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 6px;
   }
 
-  .icon-frame svg {
-    border-radius: 22%;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  .size-item svg {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
   }
 </style>
 </head>
 <body>
 
-<h1>ColorLink - Logo System</h1>
+<h1>ColorLink - CL Logomark</h1>
 
-<!-- ==================== DESIGN 1: Stacked logomark + wordmark ==================== -->
-<p class="design-label">Design 1 - Primary Logo</p>
-<div class="logo1-container">
-  <!-- Logomark: two dots connected by a path with a corner turn -->
-  <svg class="logo1-icon" viewBox="0 0 120 120" fill="none">
-    <!-- Path connecting two dots (L-shaped with rounded corner) -->
-    <path d="M 30 35 L 30 85 Q 30 95, 40 95 L 90 95"
-      stroke="#5B8FB9" stroke-width="8" stroke-linecap="round" fill="none"/>
-    <!-- Second path (shorter, different color) -->
-    <path d="M 70 25 L 70 55 Q 70 65, 80 65 L 95 65"
-      stroke="#E8785E" stroke-width="8" stroke-linecap="round" fill="none"/>
-    <!-- Endpoint dots -->
-    <circle cx="30" cy="35" r="10" fill="#5B8FB9"/>
-    <circle cx="90" cy="95" r="10" fill="#5B8FB9"/>
-    <circle cx="70" cy="25" r="10" fill="#E8785E"/>
-    <circle cx="95" cy="65" r="10" fill="#E8785E"/>
-  </svg>
-  <div class="logo1-wordmark">
-    <div class="logo1-name">ColorLink</div>
-    <div class="logo1-sub">500 PUZZLES</div>
-  </div>
-</div>
+<!--
+  LOGO CONCEPT:
+  C = large arc path (almost full circle), coral #E8785E, thicker stroke
+  L = angular path in bottom-right quadrant, ocean #5B8FB9, ~70% stroke
+  Both have 2 endpoint dots each (4 total)
+  Rounded corners, same grid system
+-->
 
-<!-- ==================== DESIGN 2: Horizontal inline ==================== -->
-<p class="design-label">Design 2 - Inline</p>
-<div class="logo2-container">
-  <svg class="logo2-icon" viewBox="0 0 64 64" fill="none">
-    <path d="M 12 16 L 12 48 Q 12 54, 18 54 L 52 54"
-      stroke="#6BAA75" stroke-width="6" stroke-linecap="round" fill="none"/>
-    <circle cx="12" cy="16" r="7" fill="#6BAA75"/>
-    <circle cx="52" cy="54" r="7" fill="#6BAA75"/>
-    <path d="M 38 10 L 38 32 Q 38 38, 44 38 L 54 38"
-      stroke="#D4A96A" stroke-width="5" stroke-linecap="round" fill="none"/>
-    <circle cx="38" cy="10" r="6" fill="#D4A96A"/>
-    <circle cx="54" cy="38" r="6" fill="#D4A96A"/>
-  </svg>
-  <div class="logo2-text">
-    <div class="logo2-name">ColorLink</div>
-    <div class="logo2-sub">500 PUZZLES</div>
-  </div>
-</div>
+<!-- ==================== VARIATION 1: MINIMAL ==================== -->
+<p class="section-label">Variation 1 - Minimal</p>
+<div class="row">
 
-<!-- ==================== DESIGN 3: Dark variant ==================== -->
-<p class="design-label">Design 3 - Dark Mode</p>
-<div class="logo3-container">
-  <svg width="80" height="80" viewBox="0 0 120 120" fill="none">
-    <path d="M 30 35 L 30 85 Q 30 95, 40 95 L 90 95"
-      stroke="#5B8FB9" stroke-width="8" stroke-linecap="round" fill="none"/>
-    <path d="M 70 25 L 70 55 Q 70 65, 80 65 L 95 65"
-      stroke="#E8785E" stroke-width="8" stroke-linecap="round" fill="none"/>
-    <circle cx="30" cy="35" r="10" fill="#5B8FB9"/>
-    <circle cx="90" cy="95" r="10" fill="#5B8FB9"/>
-    <circle cx="70" cy="25" r="10" fill="#E8785E"/>
-    <circle cx="95" cy="65" r="10" fill="#E8785E"/>
-  </svg>
-  <div class="logo3-name">ColorLink</div>
-  <div class="logo3-sub">500 PUZZLES</div>
-</div>
-
-<!-- ==================== DESIGN 4: App Icons ==================== -->
-<p class="design-label">Design 4 - App Icons</p>
-<div class="logo4-row">
-
-  <!-- Light icon -->
-  <div class="icon-frame">
-    <svg width="100" height="100" viewBox="0 0 512 512">
-      <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
-      <!-- Path 1: coral -->
-      <path d="M 140 130 L 140 310 Q 140 340, 170 340 L 370 340"
-        stroke="#E8785E" stroke-width="32" stroke-linecap="round" fill="none"/>
-      <circle cx="140" cy="130" r="38" fill="#E8785E"/>
-      <circle cx="370" cy="340" r="38" fill="#E8785E"/>
-      <!-- Path 2: ocean -->
-      <path d="M 280 130 L 280 220 Q 280 250, 310 250 L 380 250"
-        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" fill="none"/>
-      <circle cx="280" cy="130" r="34" fill="#5B8FB9"/>
-      <circle cx="380" cy="250" r="34" fill="#5B8FB9"/>
-    </svg>
-    <div class="logo4-label">Light</div>
-  </div>
-
-  <!-- Dark icon -->
-  <div class="icon-frame">
-    <svg width="100" height="100" viewBox="0 0 512 512">
+  <!-- Dark bg -->
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <path d="M 140 130 L 140 310 Q 140 340, 170 340 L 370 340"
-        stroke="#E8785E" stroke-width="32" stroke-linecap="round" fill="none"/>
-      <circle cx="140" cy="130" r="38" fill="#E8785E"/>
-      <circle cx="370" cy="340" r="38" fill="#E8785E"/>
-      <path d="M 280 130 L 280 220 Q 280 250, 310 250 L 380 250"
-        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" fill="none"/>
-      <circle cx="280" cy="130" r="34" fill="#5B8FB9"/>
-      <circle cx="380" cy="250" r="34" fill="#5B8FB9"/>
+      <!-- C: large arc from top to bottom-left -->
+      <path d="M 300 120 A 155 155 0 1 0 300 390"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" fill="none"/>
+      <circle cx="300" cy="120" r="30" fill="#E8785E"/>
+      <circle cx="300" cy="390" r="30" fill="#E8785E"/>
+      <!-- L: inside bottom-right -->
+      <path d="M 290 200 L 290 340 Q 290 365, 315 365 L 390 365"
+        stroke="#5B8FB9" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="290" cy="200" r="22" fill="#5B8FB9"/>
+      <circle cx="390" cy="365" r="22" fill="#5B8FB9"/>
     </svg>
-    <div class="logo4-label">Dark</div>
+    <span class="variant-label">Dark</span>
   </div>
 
-  <!-- Warm icon (sand bg) -->
-  <div class="icon-frame">
-    <svg width="100" height="100" viewBox="0 0 512 512">
-      <rect width="512" height="512" rx="112" fill="#f0ece6"/>
-      <path d="M 140 130 L 140 310 Q 140 340, 170 340 L 370 340"
-        stroke="#6BAA75" stroke-width="32" stroke-linecap="round" fill="none"/>
-      <circle cx="140" cy="130" r="38" fill="#6BAA75"/>
-      <circle cx="370" cy="340" r="38" fill="#6BAA75"/>
-      <path d="M 280 130 L 280 220 Q 280 250, 310 250 L 380 250"
-        stroke="#D4A96A" stroke-width="28" stroke-linecap="round" fill="none"/>
-      <circle cx="280" cy="130" r="34" fill="#D4A96A"/>
-      <circle cx="380" cy="250" r="34" fill="#D4A96A"/>
+  <!-- Light bg -->
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
+      <path d="M 300 120 A 155 155 0 1 0 300 390"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" fill="none"/>
+      <circle cx="300" cy="120" r="30" fill="#E8785E"/>
+      <circle cx="300" cy="390" r="30" fill="#E8785E"/>
+      <path d="M 290 200 L 290 340 Q 290 365, 315 365 L 390 365"
+        stroke="#5B8FB9" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="290" cy="200" r="22" fill="#5B8FB9"/>
+      <circle cx="390" cy="365" r="22" fill="#5B8FB9"/>
     </svg>
-    <div class="logo4-label">Warm</div>
+    <span class="variant-label">Light</span>
+  </div>
+
+  <!-- Warm bg -->
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f0ece6"/>
+      <path d="M 300 120 A 155 155 0 1 0 300 390"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" fill="none"/>
+      <circle cx="300" cy="120" r="30" fill="#E8785E"/>
+      <circle cx="300" cy="390" r="30" fill="#E8785E"/>
+      <path d="M 290 200 L 290 340 Q 290 365, 315 365 L 390 365"
+        stroke="#5B8FB9" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="290" cy="200" r="22" fill="#5B8FB9"/>
+      <circle cx="390" cy="365" r="22" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Warm</span>
+  </div>
+</div>
+
+<!-- ==================== VARIATION 2: BALANCED ==================== -->
+<p class="section-label">Variation 2 - Balanced</p>
+<div class="row">
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <!-- C: arc with slightly larger gap -->
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <!-- L: roomy, sits comfortably inside -->
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Dark</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Light</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f0ece6"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Warm</span>
+  </div>
+</div>
+
+<!-- ==================== VARIATION 3: EXPRESSIVE ==================== -->
+<p class="section-label">Variation 3 - Expressive</p>
+<div class="row">
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <!-- Subtle glow halos -->
+      <circle cx="256" cy="256" r="180" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.1"/>
+      <circle cx="256" cy="256" r="200" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.05"/>
+      <!-- C -->
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
+      <!-- Tiny inner glow on C endpoints -->
+      <circle cx="310" cy="105" r="12" fill="#f0ece6" opacity="0.3"/>
+      <circle cx="310" cy="405" r="12" fill="#f0ece6" opacity="0.3"/>
+      <!-- L -->
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="280" cy="190" r="9" fill="#f0ece6" opacity="0.3"/>
+      <circle cx="400" cy="370" r="9" fill="#f0ece6" opacity="0.3"/>
+    </svg>
+    <span class="variant-label">Dark</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
+      <circle cx="256" cy="256" r="180" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.08"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="105" r="12" fill="#fff" opacity="0.4"/>
+      <circle cx="310" cy="405" r="12" fill="#fff" opacity="0.4"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="280" cy="190" r="9" fill="#fff" opacity="0.4"/>
+      <circle cx="400" cy="370" r="9" fill="#fff" opacity="0.4"/>
+    </svg>
+    <span class="variant-label">Light</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f0ece6"/>
+      <circle cx="256" cy="256" r="180" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.08"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="105" r="12" fill="#fff" opacity="0.35"/>
+      <circle cx="310" cy="405" r="12" fill="#fff" opacity="0.35"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="280" cy="190" r="9" fill="#fff" opacity="0.35"/>
+      <circle cx="400" cy="370" r="9" fill="#fff" opacity="0.35"/>
+    </svg>
+    <span class="variant-label">Warm</span>
+  </div>
+</div>
+
+<!-- ==================== WORDMARKS ==================== -->
+<p class="section-label">Wordmark Lockups</p>
+<div class="wordmark-row">
+
+  <div class="wordmark">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f0ece6"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="wordmark-text">ColorLink</span>
+  </div>
+
+  <div class="wordmark wordmark-dark">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="wordmark-text">ColorLink</span>
+  </div>
+
+</div>
+
+<!-- ==================== SIZE TEST ==================== -->
+<p class="section-label">Size Test (48px to 140px)</p>
+<div class="size-row">
+
+  <div class="size-item">
+    <svg width="48" height="48" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="42" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">48px</span>
+  </div>
+
+  <div class="size-item">
+    <svg width="64" height="64" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">64px</span>
+  </div>
+
+  <div class="size-item">
+    <svg width="96" height="96" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">96px</span>
+  </div>
+
+  <div class="size-item">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 105 A 160 160 0 1 0 310 405"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
+      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
+      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+        stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
+      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">140px</span>
   </div>
 
 </div>

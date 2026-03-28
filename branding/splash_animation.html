@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ColorLink 500 - Splash Screen</title>
+<title>ColorLink - Splash Screen</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -28,359 +28,213 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
   }
 
-  .start-prompt {
-    position: absolute;
-    z-index: 100;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    color: #666;
-    text-transform: lowercase;
-    animation: gentlePulse 2s ease-in-out infinite;
-  }
-
-  @keyframes gentlePulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-  }
-
-  /* ── Path drawing layer ── */
-  .path-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
-  /* ── Logo (appears after paths connect) ── */
-  .logo-wrap {
+  .logo-svg {
     position: relative;
-    z-index: 5;
-    text-align: center;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
+    z-index: 2;
   }
 
-  .logo-name {
+  .wordmark {
+    position: relative;
+    z-index: 2;
     font-weight: 600;
-    font-size: clamp(32px, 6vw, 56px);
+    font-size: clamp(24px, 4vw, 40px);
     letter-spacing: 3px;
     color: #f0ece6;
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  .logo-sub {
-    font-weight: 300;
-    font-size: clamp(11px, 1.5vw, 15px);
-    letter-spacing: 6px;
-    color: #555;
+    margin-top: 20px;
     opacity: 0;
   }
 </style>
 </head>
 <body>
 
-<div class="splash" id="splash">
-  <div class="start-prompt" id="startPrompt">tap to begin</div>
-  <svg class="path-layer" id="pathSvg" preserveAspectRatio="xMidYMid meet"></svg>
-  <div class="logo-wrap" id="logoWrap">
-    <div class="logo-name" id="logoName">ColorLink</div>
-    <div class="logo-sub" id="logoSub">500 PUZZLES</div>
-  </div>
+<div class="splash">
+  <svg class="logo-svg" id="logoSvg" width="200" height="200" viewBox="0 0 512 512">
+    <!-- 4 endpoint dots (appear first as the "puzzle") -->
+    <circle id="dotC1" cx="310" cy="105" r="0" fill="#E8785E"/>
+    <circle id="dotC2" cx="310" cy="405" r="0" fill="#E8785E"/>
+    <circle id="dotL1" cx="280" cy="190" r="0" fill="#5B8FB9"/>
+    <circle id="dotL2" cx="400" cy="370" r="0" fill="#5B8FB9"/>
+
+    <!-- C path (large arc) - drawn after dots -->
+    <path id="pathC"
+      d="M 310 105 A 160 160 0 1 0 310 405"
+      stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"
+      stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
+
+    <!-- L path (angular, inside C) - drawn after C -->
+    <path id="pathL"
+      d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
+  </svg>
+
+  <div class="wordmark" id="wordmark">ColorLink</div>
 </div>
 
 <script>
 (function() {
 
-  /*
-   * WARM PALETTE (muted, calm):
-   *   Coral:  #E8785E
-   *   Ocean:  #5B8FB9
-   *   Sage:   #6BAA75
-   */
-  const PATHS = [
-    { color: '#E8785E', dotR: 10 },  // coral
-    { color: '#5B8FB9', dotR: 10 },  // ocean
-    { color: '#6BAA75', dotR: 9  },  // sage
-  ];
-
   // ══════════════════════════════════════════
-  //  WEB AUDIO - Warm, gentle, satisfying
+  //  WEB AUDIO - Warm, minimal
   // ══════════════════════════════════════════
-  let audioCtx;
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-  function initAudio() {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-
-  // Soft sine pad (warm ambient bed)
-  function playWarmPad(startTime, duration) {
-    const freqs = [174.61, 220, 261.63, 329.63]; // F3, A3, C4, E4 = Fmaj7
-    freqs.forEach((f, i) => {
+  // Soft sine pad
+  function playPad(startTime, duration) {
+    [174.61, 220, 261.63, 329.63].forEach(f => { // Fmaj7
       const osc = audioCtx.createOscillator();
       osc.type = 'sine';
       osc.frequency.value = f;
-
-      const gain = audioCtx.createGain();
-      gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(0.025, startTime + 0.8);
-      gain.gain.setValueAtTime(0.025, startTime + duration - 1);
-      gain.gain.linearRampToValueAtTime(0, startTime + duration);
-
-      osc.connect(gain).connect(audioCtx.destination);
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0, startTime);
+      g.gain.linearRampToValueAtTime(0.02, startTime + 0.8);
+      g.gain.setValueAtTime(0.02, startTime + duration - 1.2);
+      g.gain.linearRampToValueAtTime(0, startTime + duration);
+      osc.connect(g).connect(audioCtx.destination);
       osc.start(startTime);
       osc.stop(startTime + duration);
     });
   }
 
-  // Gentle "drawing" tone (path being traced)
-  function playDrawTone(startTime, duration, freq, panVal) {
+  // Soft dot "pop"
+  function playPop(startTime, freq) {
     const osc = audioCtx.createOscillator();
     osc.type = 'sine';
     osc.frequency.setValueAtTime(freq, startTime);
-    osc.frequency.linearRampToValueAtTime(freq * 1.15, startTime + duration);
-
-    const lp = audioCtx.createBiquadFilter();
-    lp.type = 'lowpass';
-    lp.frequency.value = 1200;
-    lp.Q.value = 1;
-
-    const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0, startTime);
-    gain.gain.linearRampToValueAtTime(0.04, startTime + 0.15);
-    gain.gain.setValueAtTime(0.04, startTime + duration * 0.7);
-    gain.gain.linearRampToValueAtTime(0, startTime + duration);
-
-    const panner = audioCtx.createStereoPanner();
-    panner.pan.value = panVal;
-
-    osc.connect(lp).connect(gain).connect(panner).connect(audioCtx.destination);
-    osc.start(startTime);
-    osc.stop(startTime + duration);
-  }
-
-  // Soft "click" when dot endpoint lands
-  function playSoftClick(startTime, freq) {
-    const osc = audioCtx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, startTime);
-    osc.frequency.exponentialRampToValueAtTime(freq * 0.8, startTime + 0.2);
-
-    const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0.08, startTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
-
-    osc.connect(gain).connect(audioCtx.destination);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.7, startTime + 0.2);
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0.1, startTime);
+    g.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+    osc.connect(g).connect(audioCtx.destination);
     osc.start(startTime);
     osc.stop(startTime + 0.3);
   }
 
-  // Final gentle "resolve" chord when logo appears
-  function playResolve(startTime) {
-    const freqs = [261.63, 329.63, 392, 523.25]; // C4, E4, G4, C5 = Cmaj
-    freqs.forEach((f, i) => {
+  // Path drawing tone
+  function playDraw(startTime, duration, freq) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, startTime);
+    osc.frequency.linearRampToValueAtTime(freq * 1.12, startTime + duration);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 1000;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0, startTime);
+    g.gain.linearRampToValueAtTime(0.035, startTime + 0.12);
+    g.gain.setValueAtTime(0.035, startTime + duration * 0.75);
+    g.gain.linearRampToValueAtTime(0, startTime + duration);
+    osc.connect(lp).connect(g).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  }
+
+  // Completion pulse (gentle resolve)
+  function playPulse(startTime) {
+    [261.63, 329.63, 392, 523.25].forEach((f, i) => { // Cmaj
       const osc = audioCtx.createOscillator();
       osc.type = 'sine';
       osc.frequency.value = f;
-
-      const gain = audioCtx.createGain();
-      gain.gain.setValueAtTime(0, startTime + i * 0.06);
-      gain.gain.linearRampToValueAtTime(0.04, startTime + i * 0.06 + 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.5);
-
-      osc.connect(gain).connect(audioCtx.destination);
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0, startTime + i * 0.05);
+      g.gain.linearRampToValueAtTime(0.04, startTime + i * 0.05 + 0.08);
+      g.gain.exponentialRampToValueAtTime(0.001, startTime + 1.4);
+      osc.connect(g).connect(audioCtx.destination);
       osc.start(startTime);
-      osc.stop(startTime + 1.8);
+      osc.stop(startTime + 1.6);
     });
   }
 
-  function playAllSounds() {
-    const t = audioCtx.currentTime + 0.05;
-
-    // Ambient bed (whole duration)
-    playWarmPad(t, 4.5);
-
-    // Path 1 draws (coral) - from left
-    playDrawTone(t + 0.2, 1.0, 349.23, -0.3);  // F4
-    playSoftClick(t + 0.2, 440);                  // start dot
-    playSoftClick(t + 1.15, 523.25);              // end dot
-
-    // Path 2 draws (ocean) - from right
-    playDrawTone(t + 0.6, 1.0, 392, 0.3);        // G4
-    playSoftClick(t + 0.6, 466.16);               // start dot
-    playSoftClick(t + 1.55, 554.37);              // end dot
-
-    // Path 3 draws (sage) - center
-    playDrawTone(t + 1.0, 0.8, 440, 0);          // A4
-    playSoftClick(t + 1.0, 493.88);               // start dot
-    playSoftClick(t + 1.75, 587.33);              // end dot
-
-    // Logo resolve
-    playResolve(t + 2.2);
-  }
-
   // ══════════════════════════════════════════
-  //  VISUAL ANIMATION
+  //  ANIMATION TIMELINE (auto-start)
   // ══════════════════════════════════════════
-  function startAnimation() {
-    document.getElementById('startPrompt').style.display = 'none';
+  const t = audioCtx.currentTime + 0.3;
 
-    const svg = document.getElementById('pathSvg');
-    const W = window.innerWidth;
-    const H = window.innerHeight;
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  // Schedule all sounds
+  playPad(t, 4.5);
 
-    const CX = W / 2;
-    const CY = H / 2;
+  // Dot pops (t+0.3 to t+0.9)
+  playPop(t + 0.3, 440);    // C dot 1
+  playPop(t + 0.55, 494);   // C dot 2
+  playPop(t + 0.8, 523);    // L dot 1
+  playPop(t + 1.0, 587);    // L dot 2
 
-    // Three paths that converge toward center, each with an L-turn
-    // Like actual gameplay: dot → path with corner → dot
-    const pathDefs = [
-      {
-        // Coral: enters from upper-left, turns right toward center
-        points: [
-          { x: CX - 180, y: CY - 80 },                    // start dot
-          { x: CX - 180, y: CY + 20 },                    // vertical down
-          { x: CX - 40,  y: CY + 20 },                    // horizontal right (end)
-        ],
-        color: '#E8785E',
-        delay: 200,
-        duration: 1000,
-      },
-      {
-        // Ocean: enters from upper-right, turns left toward center
-        points: [
-          { x: CX + 160, y: CY - 70 },                    // start dot
-          { x: CX + 160, y: CY - 10 },                    // vertical down
-          { x: CX + 30,  y: CY - 10 },                    // horizontal left (end)
-        ],
-        color: '#5B8FB9',
-        delay: 600,
-        duration: 1000,
-      },
-      {
-        // Sage: enters from bottom-center, turns right
-        points: [
-          { x: CX - 60,  y: CY + 90 },                    // start dot
-          { x: CX - 60,  y: CY + 50 },                    // vertical up
-          { x: CX + 80,  y: CY + 50 },                    // horizontal right (end)
-        ],
-        color: '#6BAA75',
-        delay: 1000,
-        duration: 800,
-      },
-    ];
+  // C path draw (t+1.3)
+  playDraw(t + 1.3, 1.0, 349);
 
-    pathDefs.forEach((pd) => {
-      const pts = pd.points;
+  // L path draw (t+2.0)
+  playDraw(t + 2.0, 0.7, 392);
 
-      // Build SVG path with rounded corner
-      const midX = pts[0].x;
-      const midY = pts[1].y;
-      const r = 12; // corner radius
+  // Completion pulse (t+2.9)
+  playPulse(t + 2.9);
 
-      // Determine corner direction
-      const goingDown = pts[1].y > pts[0].y;
-      const goingRight = pts[2].x > pts[1].x;
+  // ── Visual sequence ──
+  const dotC1 = document.getElementById('dotC1');
+  const dotC2 = document.getElementById('dotC2');
+  const dotL1 = document.getElementById('dotL1');
+  const dotL2 = document.getElementById('dotL2');
+  const pathC = document.getElementById('pathC');
+  const pathL = document.getElementById('pathL');
+  const wordmark = document.getElementById('wordmark');
 
-      let d;
-      if (goingDown && goingRight) {
-        d = `M ${pts[0].x} ${pts[0].y} L ${pts[0].x} ${pts[1].y - r} Q ${pts[0].x} ${pts[1].y}, ${pts[0].x + r} ${pts[1].y} L ${pts[2].x} ${pts[2].y}`;
-      } else if (goingDown && !goingRight) {
-        d = `M ${pts[0].x} ${pts[0].y} L ${pts[0].x} ${pts[1].y - r} Q ${pts[0].x} ${pts[1].y}, ${pts[0].x - r} ${pts[1].y} L ${pts[2].x} ${pts[2].y}`;
-      } else if (!goingDown && goingRight) {
-        d = `M ${pts[0].x} ${pts[0].y} L ${pts[0].x} ${pts[1].y + r} Q ${pts[0].x} ${pts[1].y}, ${pts[0].x + r} ${pts[1].y} L ${pts[2].x} ${pts[2].y}`;
-      } else {
-        d = `M ${pts[0].x} ${pts[0].y} L ${pts[0].x} ${pts[1].y + r} Q ${pts[0].x} ${pts[1].y}, ${pts[0].x - r} ${pts[1].y} L ${pts[2].x} ${pts[2].y}`;
-      }
-
-      // Create path element
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', d);
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke', pd.color);
-      path.setAttribute('stroke-width', '6');
-      path.setAttribute('stroke-linecap', 'round');
-      path.setAttribute('stroke-linejoin', 'round');
-
-      const pathLength = path.getTotalLength ? path.getTotalLength() : 600;
-      path.style.strokeDasharray = pathLength;
-      path.style.strokeDashoffset = pathLength;
-
-      svg.appendChild(path);
-
-      // Start dot (appears first)
-      const dot1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      dot1.setAttribute('cx', pts[0].x);
-      dot1.setAttribute('cy', pts[0].y);
-      dot1.setAttribute('r', '0');
-      dot1.setAttribute('fill', pd.color);
-      svg.appendChild(dot1);
-
-      // End dot (appears when path arrives)
-      const dot2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      dot2.setAttribute('cx', pts[2].x);
-      dot2.setAttribute('cy', pts[2].y);
-      dot2.setAttribute('r', '0');
-      dot2.setAttribute('fill', pd.color);
-      svg.appendChild(dot2);
-
-      // Animate with timeouts (clean, no loops)
-      setTimeout(() => {
-        // Start dot pops in
-        dot1.style.transition = 'r 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        dot1.setAttribute('r', '8');
-
-        // Path draws
-        path.style.transition = `stroke-dashoffset ${pd.duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-        path.style.strokeDashoffset = '0';
-
-        // End dot appears when path finishes
-        setTimeout(() => {
-          dot2.style.transition = 'r 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)';
-          dot2.setAttribute('r', '8');
-        }, pd.duration - 50);
-      }, pd.delay);
-    });
-
-    // Logo appears after all paths are done (clean fade, then static)
+  // Utility: animate dot radius with spring
+  function popDot(el, targetR, delay) {
     setTimeout(() => {
-      const logoWrap = document.getElementById('logoWrap');
-      const logoName = document.getElementById('logoName');
-      const logoSub = document.getElementById('logoSub');
-
-      logoWrap.style.transition = 'opacity 0.5s ease';
-      logoWrap.style.opacity = '1';
-
-      logoName.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      logoName.style.opacity = '1';
-      logoName.style.transform = 'translateY(0)';
-
-      setTimeout(() => {
-        logoSub.style.transition = 'opacity 0.5s ease';
-        logoSub.style.opacity = '1';
-      }, 300);
-    }, 2200);
+      el.style.transition = `r 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)`;
+      el.setAttribute('r', targetR);
+    }, delay);
   }
 
-  // ══════════════════════════════════════════
-  //  START ON CLICK/TAP
-  // ══════════════════════════════════════════
-  let started = false;
-  document.getElementById('splash').addEventListener('click', () => {
-    if (started) return;
-    started = true;
-    initAudio();
-    playAllSounds();
-    startAnimation();
-  });
+  // Utility: draw path
+  function drawPath(el, delay, duration) {
+    // Measure real length
+    const len = el.getTotalLength();
+    el.setAttribute('stroke-dasharray', len);
+    el.setAttribute('stroke-dashoffset', len);
+    el.setAttribute('opacity', '1');
+
+    setTimeout(() => {
+      el.style.transition = `stroke-dashoffset ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      el.setAttribute('stroke-dashoffset', '0');
+    }, delay);
+  }
+
+  // PHASE 1: Dots appear (like puzzle clues being placed)
+  popDot(dotC1, 32, 300);    // C endpoint 1
+  popDot(dotC2, 32, 550);    // C endpoint 2
+  popDot(dotL1, 24, 800);    // L endpoint 1
+  popDot(dotL2, 24, 1000);   // L endpoint 2
+
+  // PHASE 2: C path draws (connecting its dots)
+  drawPath(pathC, 1300, 1000);
+
+  // PHASE 3: L path draws (connecting its dots)
+  drawPath(pathL, 2000, 700);
+
+  // PHASE 4: Completion pulse - dots briefly scale up then settle
+  setTimeout(() => {
+    [dotC1, dotC2, dotL1, dotL2].forEach((d, i) => {
+      const baseR = i < 2 ? 32 : 24;
+      const pulseR = i < 2 ? 38 : 29;
+
+      d.style.transition = 'r 0.2s ease-out';
+      d.setAttribute('r', pulseR);
+
+      setTimeout(() => {
+        d.style.transition = 'r 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        d.setAttribute('r', baseR);
+      }, 200);
+    });
+  }, 2900);
+
+  // PHASE 5: Wordmark fades in, then everything is static
+  setTimeout(() => {
+    wordmark.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    wordmark.style.opacity = '1';
+    wordmark.style.transform = 'translateY(0)';
+  }, 3200);
 
 })();
 </script>
