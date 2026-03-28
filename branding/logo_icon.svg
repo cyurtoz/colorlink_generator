@@ -7,9 +7,14 @@
   <circle cx="310" cy="90" r="32" fill="#E8785E"/>
   <circle cx="310" cy="420" r="32" fill="#E8785E"/>
 
-  <!-- L: inside C, equal gap on left and bottom edges -->
-  <path d="M 150 170 L 150 320 Q 150 350, 180 350 L 275 350"
+  <!--
+    L inside C — equal 42px edge-to-edge gap on left and bottom:
+    Left:   L_x=158.  (158-17) - (80+19) = 42
+    Bottom: L_y=342.  (420-19) - (342+17) = 42
+    Bottom extended to x=305 to avoid endpoint crowding.
+  -->
+  <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
     stroke="#5B8FB9" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="150" cy="170" r="29" fill="#5B8FB9"/>
-  <circle cx="275" cy="350" r="29" fill="#5B8FB9"/>
+  <circle cx="158" cy="175" r="29" fill="#5B8FB9"/>
+  <circle cx="305" cy="342" r="29" fill="#5B8FB9"/>
 </svg>
