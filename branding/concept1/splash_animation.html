@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorLink 500 - Concept 1: Tron / Sci-Fi Splash</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #08081a;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .splash {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .start-prompt {
+    position: absolute;
+    z-index: 100;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: #3B8BFF;
+    text-transform: uppercase;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0;
+  }
+
+  .ribbon-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .logo-text {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .logo-main {
+    font-weight: 900;
+    font-size: clamp(40px, 8vw, 80px);
+    letter-spacing: 6px;
+    opacity: 0;
+    position: relative;
+    display: inline-block;
+  }
+
+  .logo-main .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    background: linear-gradient(180deg, #ffffff 0%, #ccccdd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .logo-500 {
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 52px);
+    letter-spacing: 16px;
+    margin-top: 4px;
+    opacity: 0;
+    background: linear-gradient(90deg, #FFD93B, #FF8C3B, #FF3B5C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline {
+    font-size: clamp(8px, 1.2vw, 12px);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #444;
+    margin-top: 16px;
+    opacity: 0;
+  }
+
+  .glow-pulse {
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(59,139,255,0.15) 0%, transparent 70%);
+    z-index: 0;
+    opacity: 0;
+  }
+
+  .float-dot {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  /* ── Animation classes (applied by JS after click) ── */
+  .anim-fade-in       { animation: fadeIn 1s 0.3s forwards; }
+  .anim-text-show     { opacity: 1 !important; }
+  .anim-text-reveal   { animation: textReveal 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .anim-char-pop      { animation: charPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+  .anim-500-reveal    { animation: num500Reveal 0.8s 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .anim-tagline-fade  { animation: fadeIn 0.8s 2.8s forwards; }
+  .anim-glow          { animation: glowPulse 3s 1.5s ease-in-out infinite; }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes textReveal {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes charPop {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes num500Reveal {
+    from { opacity: 0; letter-spacing: 40px; }
+    to { opacity: 1; letter-spacing: 16px; }
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+  }
+  @keyframes floatDot {
+    0% { transform: translate(0, 0) scale(0); opacity: 0; }
+    20% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
+  }
+  @keyframes drawRibbon {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes dotAppear {
+    to { r: 6; }
+  }
+  @keyframes shimmer {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.5; }
+  }
+</style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <div class="start-prompt" id="startPrompt">Click to start</div>
+  <div class="bg-grid" id="bgGrid"></div>
+  <div class="glow-pulse" id="glowPulse"></div>
+  <svg class="ribbon-layer" id="ribbonSvg" preserveAspectRatio="xMidYMid slice"></svg>
+  <div id="dotsContainer"></div>
+  <div class="logo-text" id="logoText">
+    <div class="logo-main" id="logoMain"></div>
+    <div class="logo-500" id="logo500">500</div>
+    <div class="tagline" id="tagline">Connect &middot; Solve &middot; Master</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const COLORS = [
+    { hex: '#FF3B5C', rgb: [255, 59, 92]  },
+    { hex: '#FF8C3B', rgb: [255, 140, 59] },
+    { hex: '#FFD93B', rgb: [255, 217, 59] },
+    { hex: '#3BFF8B', rgb: [59, 255, 139] },
+    { hex: '#3BD4FF', rgb: [59, 212, 255] },
+    { hex: '#3B8BFF', rgb: [59, 139, 255] },
+    { hex: '#7B3BFF', rgb: [123, 59, 255] },
+    { hex: '#C73BFF', rgb: [199, 59, 255] },
+  ];
+
+  const WORD = 'COLORLINK';
+
+  // Build character spans (hidden until animation starts)
+  const logoMain = document.getElementById('logoMain');
+  WORD.split('').forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.className = 'char';
+    span.textContent = ch;
+    span.dataset.delay = 0.8 + i * 0.09;
+    logoMain.appendChild(span);
+  });
+
+  // ══════════════════════════════════════════════
+  //  WEB AUDIO API - Tron / Sci-Fi Sound Engine
+  // ══════════════════════════════════════════════
+  let audioCtx;
+
+  function initAudio() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  // Filtered noise burst - "digital wind" whoosh
+  function playWhoosh(startTime, duration, panValue, pitch) {
+    const bufferSize = audioCtx.sampleRate * duration;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1);
+    }
+
+    const source = audioCtx.createBufferSource();
+    source.buffer = buffer;
+
+    // Bandpass filter for that tron "shhhhwing" tone
+    const bp = audioCtx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.setValueAtTime(pitch, startTime);
+    bp.frequency.exponentialRampToValueAtTime(pitch * 3, startTime + duration * 0.4);
+    bp.frequency.exponentialRampToValueAtTime(pitch * 0.5, startTime + duration);
+    bp.Q.value = 8;
+
+    // Envelope
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.12, startTime + duration * 0.15);
+    gain.gain.linearRampToValueAtTime(0.08, startTime + duration * 0.5);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+    // Stereo pan (ribbons from left/right)
+    const panner = audioCtx.createStereoPanner();
+    panner.pan.setValueAtTime(panValue, startTime);
+    panner.pan.linearRampToValueAtTime(0, startTime + duration);
+
+    source.connect(bp).connect(gain).connect(panner).connect(audioCtx.destination);
+    source.start(startTime);
+    source.stop(startTime + duration);
+  }
+
+  // Rising tone sweep - ribbon travel sound
+  function playRibbonTone(startTime, duration, freq, panValue) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(freq, startTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 2.5, startTime + duration);
+
+    const bp = audioCtx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.setValueAtTime(freq * 2, startTime);
+    bp.frequency.exponentialRampToValueAtTime(freq * 6, startTime + duration);
+    bp.Q.value = 4;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.04, startTime + 0.05);
+    gain.gain.setValueAtTime(0.04, startTime + duration * 0.7);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+    const panner = audioCtx.createStereoPanner();
+    panner.pan.setValueAtTime(panValue, startTime);
+    panner.pan.linearRampToValueAtTime(0, startTime + duration);
+
+    osc.connect(bp).connect(gain).connect(panner).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  }
+
+  // Crystalline "ping" for dot endpoints and char pops
+  function playPing(startTime, freq) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, startTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.5, startTime + 0.3);
+
+    const osc2 = audioCtx.createOscillator();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq * 2.01, startTime);
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.06, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.4);
+
+    const gain2 = audioCtx.createGain();
+    gain2.gain.setValueAtTime(0.025, startTime);
+    gain2.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+
+    // Subtle reverb via delay
+    const delay = audioCtx.createDelay();
+    delay.delayTime.value = 0.08;
+    const delayGain = audioCtx.createGain();
+    delayGain.gain.value = 0.3;
+
+    osc.connect(gain).connect(audioCtx.destination);
+    osc2.connect(gain2).connect(audioCtx.destination);
+    gain.connect(delay).connect(delayGain).connect(audioCtx.destination);
+
+    osc.start(startTime);
+    osc.stop(startTime + 0.5);
+    osc2.start(startTime);
+    osc2.stop(startTime + 0.3);
+  }
+
+  // Deep bass drop for "500" reveal
+  function playBassDrop(startTime) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(200, startTime);
+    osc.frequency.exponentialRampToValueAtTime(40, startTime + 0.6);
+
+    const osc2 = audioCtx.createOscillator();
+    osc2.type = 'square';
+    osc2.frequency.setValueAtTime(150, startTime);
+    osc2.frequency.exponentialRampToValueAtTime(30, startTime + 0.5);
+
+    const distortion = audioCtx.createWaveShaper();
+    const curve = new Float32Array(256);
+    for (let i = 0; i < 256; i++) {
+      const x = (i / 128) - 1;
+      curve[i] = Math.tanh(x * 2);
+    }
+    distortion.curve = curve;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.15, startTime);
+    gain.gain.linearRampToValueAtTime(0.2, startTime + 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.8);
+
+    const gain2 = audioCtx.createGain();
+    gain2.gain.setValueAtTime(0.03, startTime);
+    gain2.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
+
+    osc.connect(gain).connect(audioCtx.destination);
+    osc2.connect(distortion).connect(gain2).connect(audioCtx.destination);
+
+    osc.start(startTime);
+    osc.stop(startTime + 1);
+    osc2.start(startTime);
+    osc2.stop(startTime + 0.6);
+  }
+
+  // Ambient pad - continuous background hum
+  function playAmbientPad(startTime) {
+    const freqs = [110, 164.81, 220, 329.63];
+    freqs.forEach(f => {
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.015, startTime + 1);
+      gain.gain.setValueAtTime(0.015, startTime + 3);
+      gain.gain.linearRampToValueAtTime(0.02, startTime + 4);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 6);
+
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + 6);
+    });
+  }
+
+  // Electric crackle texture
+  function playCrackle(startTime, duration) {
+    const bufferSize = audioCtx.sampleRate * duration;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() < 0.02 ? (Math.random() * 2 - 1) : 0;
+    }
+
+    const source = audioCtx.createBufferSource();
+    source.buffer = buffer;
+
+    const hp = audioCtx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = 4000;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.08, startTime + 0.3);
+    gain.gain.setValueAtTime(0.08, startTime + duration * 0.6);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+    source.connect(hp).connect(gain).connect(audioCtx.destination);
+    source.start(startTime);
+    source.stop(startTime + duration);
+  }
+
+  function playAllSounds() {
+    const t = audioCtx.currentTime + 0.05;
+
+    // Background ambient pad starts immediately
+    playAmbientPad(t);
+
+    // Ribbon whooshes from left (t+0.2 to t+0.65) with rising pitches
+    playWhoosh(t + 0.2, 1.4, -0.8, 600);
+    playWhoosh(t + 0.35, 1.4, -0.6, 800);
+    playWhoosh(t + 0.5, 1.4, -0.4, 1000);
+    playWhoosh(t + 0.65, 1.4, -0.2, 1200);
+
+    // Ribbon whooshes from right
+    playWhoosh(t + 0.3, 1.4, 0.8, 700);
+    playWhoosh(t + 0.45, 1.4, 0.6, 900);
+    playWhoosh(t + 0.6, 1.4, 0.4, 1100);
+    playWhoosh(t + 0.75, 1.4, 0.2, 1300);
+
+    // Ribbon tones (tron light cycle feel)
+    playRibbonTone(t + 0.2, 1.4, 200, -0.7);
+    playRibbonTone(t + 0.35, 1.4, 250, -0.5);
+    playRibbonTone(t + 0.3, 1.4, 220, 0.7);
+    playRibbonTone(t + 0.45, 1.4, 280, 0.5);
+
+    // Electric crackle as ribbons converge
+    playCrackle(t + 0.8, 2.0);
+
+    // Character pings (ascending scale as letters appear)
+    const charNotes = [523, 587, 659, 698, 784, 880, 988, 1047, 1175];
+    charNotes.forEach((freq, i) => {
+      playPing(t + 0.8 + i * 0.09, freq);
+    });
+
+    // Dot endpoint pings
+    for (let i = 0; i < 8; i++) {
+      playPing(t + 1.4 + i * 0.08, 1500 + i * 100);
+    }
+
+    // Bass drop for "500"
+    playBassDrop(t + 2.2);
+
+    // Final shimmer pings
+    playPing(t + 2.8, 1760);
+    playPing(t + 2.9, 2093);
+    playPing(t + 3.0, 2637);
+  }
+
+  // ══════════════════════════════════════════════
+  //  VISUAL ANIMATION (triggered on click)
+  // ══════════════════════════════════════════════
+  function startAnimation() {
+    document.getElementById('startPrompt').style.display = 'none';
+    document.getElementById('logoText').style.opacity = '1';
+
+    // Grid fade in
+    document.getElementById('bgGrid').classList.add('anim-fade-in');
+
+    // Glow pulse
+    document.getElementById('glowPulse').classList.add('anim-glow');
+
+    // Logo text reveal
+    logoMain.classList.add('anim-text-reveal');
+    logoMain.querySelectorAll('.char').forEach(ch => {
+      ch.style.animationDelay = ch.dataset.delay + 's';
+      ch.classList.add('anim-char-pop');
+    });
+
+    // 500 reveal
+    document.getElementById('logo500').style.animation =
+      'num500Reveal 0.8s 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+
+    // Tagline
+    document.getElementById('tagline').style.animation = 'fadeIn 0.8s 2.8s forwards';
+
+    // ── Ribbons ──
+    const svg = document.getElementById('ribbonSvg');
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+    const CX = W / 2;
+    const CY = H / 2;
+
+    const ribbonConfigs = [
+      { startX: -80,  startY: CY - 60, color: COLORS[0], side: 'left',  yOffset: -40, delay: 0.2 },
+      { startX: -80,  startY: CY - 15, color: COLORS[1], side: 'left',  yOffset: -10, delay: 0.35 },
+      { startX: -80,  startY: CY + 20, color: COLORS[2], side: 'left',  yOffset: 15,  delay: 0.5 },
+      { startX: -80,  startY: CY + 55, color: COLORS[3], side: 'left',  yOffset: 45,  delay: 0.65 },
+      { startX: W+80, startY: CY - 50, color: COLORS[4], side: 'right', yOffset: -35, delay: 0.3 },
+      { startX: W+80, startY: CY - 5,  color: COLORS[5], side: 'right', yOffset: 0,   delay: 0.45 },
+      { startX: W+80, startY: CY + 35, color: COLORS[6], side: 'right', yOffset: 25,  delay: 0.6 },
+      { startX: W+80, startY: CY + 65, color: COLORS[7], side: 'right', yOffset: 50,  delay: 0.75 },
+    ];
+
+    ribbonConfigs.forEach((cfg) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const endX = cfg.side === 'left' ? CX + 120 : CX - 120;
+      const endY = CY + cfg.yOffset;
+      const cp1x = cfg.side === 'left' ? CX * 0.3 : W - CX * 0.3;
+      const cp1y = cfg.startY + (Math.random() - 0.5) * 80;
+      const cp2x = cfg.side === 'left' ? CX * 0.7 : W - CX * 0.7 + CX;
+      const cp2y = endY + (Math.random() - 0.5) * 60;
+
+      path.setAttribute('d', `M ${cfg.startX} ${cfg.startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', cfg.color.hex);
+      path.setAttribute('stroke-width', '6');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('opacity', '0.7');
+      path.style.strokeDasharray = '2000';
+      path.style.strokeDashoffset = '2000';
+      path.style.filter = `drop-shadow(0 0 6px ${cfg.color.hex})`;
+      path.style.animation = `drawRibbon 1.4s ${cfg.delay}s cubic-bezier(0.25, 0.1, 0.25, 1) forwards`;
+      svg.appendChild(path);
+
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', endX);
+      dot.setAttribute('cy', endY);
+      dot.setAttribute('r', '0');
+      dot.setAttribute('fill', cfg.color.hex);
+      dot.style.filter = `drop-shadow(0 0 8px ${cfg.color.hex})`;
+      dot.style.animation = `dotAppear 0.4s ${cfg.delay + 1.2}s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
+      svg.appendChild(dot);
+    });
+
+    // Shimmer after ribbons
+    setTimeout(() => {
+      svg.querySelectorAll('path').forEach(p => {
+        p.style.animation = `shimmer 2.5s ${Math.random()}s ease-in-out infinite`;
+      });
+    }, 2500);
+
+    // Floating dots
+    const dotsContainer = document.getElementById('dotsContainer');
+    function spawnDots() {
+      for (let i = 0; i < 20; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'float-dot';
+        const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const size = 4 + Math.random() * 8;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.background = c.hex;
+        dot.style.boxShadow = `0 0 ${size}px ${c.hex}`;
+        dot.style.left = (CX - 200 + Math.random() * 400) + 'px';
+        dot.style.top = (CY - 60 + Math.random() * 120) + 'px';
+        dot.style.setProperty('--dx', (Math.random() - 0.5) * 200 + 'px');
+        dot.style.setProperty('--dy', (Math.random() - 0.5) * 200 + 'px');
+        dot.style.animation = `floatDot ${1.5 + Math.random() * 2}s ${Math.random() * 0.5}s ease-out forwards`;
+        dotsContainer.appendChild(dot);
+      }
+    }
+    setTimeout(spawnDots, 2000);
+    setTimeout(spawnDots, 3500);
+
+    // Accent ribbons wave 2
+    setTimeout(() => {
+      const accentConfigs = [
+        { startX: -40, startY: CY - 80, color: COLORS[5], side: 'left' },
+        { startX: -40, startY: CY + 80, color: COLORS[2], side: 'left' },
+        { startX: W+40, startY: CY - 70, color: COLORS[0], side: 'right' },
+        { startX: W+40, startY: CY + 70, color: COLORS[7], side: 'right' },
+      ];
+      accentConfigs.forEach((cfg, i) => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const endX = cfg.side === 'left' ? CX + 160 : CX - 160;
+        const endY = CY + (Math.random() - 0.5) * 40;
+        const cp1x = cfg.side === 'left' ? W * 0.25 : W * 0.75;
+        const cp1y = cfg.startY + (Math.random() - 0.5) * 100;
+        const cp2x = cfg.side === 'left' ? W * 0.55 : W * 0.45;
+        const cp2y = endY + (Math.random() - 0.5) * 50;
+        path.setAttribute('d', `M ${cfg.startX} ${cfg.startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', cfg.color.hex);
+        path.setAttribute('stroke-width', '3');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('opacity', '0.4');
+        path.style.strokeDasharray = '2000';
+        path.style.strokeDashoffset = '2000';
+        path.style.filter = `drop-shadow(0 0 4px ${cfg.color.hex})`;
+        path.style.animation = `drawRibbon 1.2s ${i * 0.15}s ease forwards`;
+        svg.appendChild(path);
+      });
+    }, 1800);
+  }
+
+  // ══════════════════════════════════════════════
+  //  START ON CLICK (needed for audio context)
+  // ══════════════════════════════════════════════
+  let started = false;
+  document.getElementById('splash').addEventListener('click', () => {
+    if (started) return;
+    started = true;
+    initAudio();
+    playAllSounds();
+    startAnimation();
+  });
+
+})();
+</script>
+
+</body>
+</html>

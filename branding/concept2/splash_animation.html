@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorLink 500 - Concept 2: Retro 80s Splash</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Press+Start+2P&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a2e;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .splash {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .start-prompt {
+    position: absolute;
+    z-index: 100;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #FF6B9D;
+    text-transform: uppercase;
+    animation: blink80s 1s steps(2) infinite;
+  }
+
+  @keyframes blink80s {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── Sunset background ── */
+  .sunset-bg {
+    position: absolute;
+    bottom: 30%;
+    width: 50vmin;
+    height: 50vmin;
+    border-radius: 50%;
+    background: linear-gradient(180deg,
+      #FFE156 0%,
+      #FF8C42 25%,
+      #FF6B9D 50%,
+      #C44DFF 75%,
+      transparent 75%
+    );
+    opacity: 0;
+    transform: scale(0.3);
+    transition: none;
+  }
+
+  /* Scan lines over sun */
+  .sunset-lines {
+    position: absolute;
+    bottom: 30%;
+    width: 50vmin;
+    height: 25vmin;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      #0a0a2e 3px,
+      #0a0a2e 6px
+    );
+    opacity: 0;
+    z-index: 1;
+  }
+
+  /* ── Perspective grid ── */
+  .grid-floor {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    left: -50%;
+    height: 35vh;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent calc(50% / 15 - 1px),
+        rgba(196,77,255,0.25) calc(50% / 15 - 1px),
+        rgba(196,77,255,0.25) calc(50% / 15),
+        transparent calc(50% / 15)
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 30px,
+        rgba(196,77,255,0.15) 30px,
+        rgba(196,77,255,0.15) 31px
+      );
+    transform: perspective(300px) rotateX(50deg);
+    transform-origin: bottom center;
+    opacity: 0;
+  }
+
+  /* ── Stars ── */
+  .stars {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  /* ── Retro ribbons (three stripes from each side) ── */
+  .ribbon-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+
+  /* ── Logo ── */
+  .logo-wrapper {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .logo-colorlink {
+    font-family: 'Righteous', cursive;
+    font-size: clamp(44px, 9vw, 90px);
+    letter-spacing: 4px;
+    opacity: 0;
+    transform: translateY(40px);
+    background: linear-gradient(180deg, #FFE156 0%, #FF6B9D 50%, #C44DFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 30px rgba(255,107,157,0.5));
+  }
+
+  .logo-colorlink.shadow-layer {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(180deg, #FF6B9D33 0%, #C44DFF33 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: none;
+    z-index: -1;
+  }
+
+  .logo-500 {
+    font-family: 'Righteous', cursive;
+    font-size: clamp(30px, 6vw, 60px);
+    letter-spacing: 24px;
+    opacity: 0;
+    background: linear-gradient(180deg, #4DCCFF 0%, #C44DFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: -4px;
+  }
+
+  .logo-tagline {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(6px, 1vw, 10px);
+    letter-spacing: 5px;
+    color: #FF6B9D;
+    margin-top: 20px;
+    opacity: 0;
+  }
+
+  /* Three stripes beneath text */
+  .three-stripes {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    opacity: 0;
+  }
+
+  .three-stripes div {
+    width: 60px;
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  .three-stripes div:nth-child(1) { background: #FF6B9D; }
+  .three-stripes div:nth-child(2) { background: #C44DFF; }
+  .three-stripes div:nth-child(3) { background: #4DCCFF; }
+
+  /* ── VHS overlay ── */
+  .vhs-overlay {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.008) 2px,
+      rgba(255,255,255,0.008) 4px
+    );
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* ── Animations ── */
+  @keyframes sunRise {
+    from { opacity: 0; transform: scale(0.3) translateY(40px); }
+    to { opacity: 0.6; transform: scale(1) translateY(0); }
+  }
+  @keyframes gridAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideInTitle {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes expand500 {
+    from { opacity: 0; letter-spacing: 50px; }
+    to { opacity: 1; letter-spacing: 24px; }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes stripeSlide {
+    from { stroke-dashoffset: 2000; }
+    to { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <div class="start-prompt" id="startPrompt">Press Start</div>
+
+  <div class="stars" id="stars"></div>
+  <div class="sunset-bg" id="sunsetBg"></div>
+  <div class="sunset-lines" id="sunsetLines"></div>
+  <div class="grid-floor" id="gridFloor"></div>
+
+  <svg class="ribbon-layer" id="ribbonSvg" preserveAspectRatio="xMidYMid slice"></svg>
+
+  <div class="logo-wrapper" id="logoWrapper">
+    <div class="logo-colorlink shadow-layer" id="logoShadow">COLORLINK</div>
+    <div class="logo-colorlink" id="logoTitle">COLORLINK</div>
+    <div class="logo-500" id="logo500">500</div>
+    <div class="logo-tagline" id="logoTagline">Connect the colors</div>
+    <div class="three-stripes" id="threeStripes">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+
+  <div class="vhs-overlay" id="vhsOverlay"></div>
+</div>
+
+<script>
+(function() {
+  const STRIPE_COLORS = ['#FF6B9D', '#C44DFF', '#4DCCFF', '#FFE156', '#FF8C42', '#48E5C2'];
+
+  // ── Generate stars ──
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 60 + '%';
+    s.style.opacity = 0.2 + Math.random() * 0.6;
+    if (Math.random() > 0.7) {
+      s.style.width = '3px';
+      s.style.height = '3px';
+    }
+    starsEl.appendChild(s);
+  }
+
+  // ══════════════════════════════════════════════
+  //  WEB AUDIO - 80s Synthwave Sound Engine
+  // ══════════════════════════════════════════════
+  let audioCtx;
+
+  function initAudio() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  // Detuned saw pad (classic 80s synth chord)
+  function playSynthPad(startTime, duration, freq) {
+    const detunes = [-12, -5, 0, 5, 12];
+    detunes.forEach(d => {
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = freq;
+      osc.detune.value = d;
+
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(400, startTime);
+      lp.frequency.linearRampToValueAtTime(2000, startTime + duration * 0.4);
+      lp.frequency.linearRampToValueAtTime(800, startTime + duration);
+      lp.Q.value = 2;
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.025, startTime + 0.4);
+      gain.gain.setValueAtTime(0.025, startTime + duration * 0.7);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+      osc.connect(lp).connect(gain).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    });
+  }
+
+  // Retro arp sequence (ascending notes)
+  function playArp(startTime, notes, noteLen) {
+    notes.forEach((freq, i) => {
+      const t = startTime + i * noteLen;
+
+      const osc = audioCtx.createOscillator();
+      osc.type = 'square';
+      osc.frequency.value = freq;
+
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(3000, t);
+      lp.frequency.exponentialRampToValueAtTime(500, t + noteLen * 0.9);
+      lp.Q.value = 3;
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.06, t);
+      gain.gain.setValueAtTime(0.06, t + noteLen * 0.5);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + noteLen * 0.95);
+
+      // Chorus via slight delay
+      const delay = audioCtx.createDelay();
+      delay.delayTime.value = 0.03;
+      const dGain = audioCtx.createGain();
+      dGain.gain.value = 0.4;
+
+      osc.connect(lp).connect(gain).connect(audioCtx.destination);
+      gain.connect(delay).connect(dGain).connect(audioCtx.destination);
+      osc.start(t);
+      osc.stop(t + noteLen);
+    });
+  }
+
+  // Snare (noise burst with short envelope)
+  function playSnare(startTime) {
+    const bufferSize = audioCtx.sampleRate * 0.15;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    const source = audioCtx.createBufferSource();
+    source.buffer = buffer;
+
+    const hp = audioCtx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = 2000;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.12, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.15);
+
+    source.connect(hp).connect(gain).connect(audioCtx.destination);
+    source.start(startTime);
+    source.stop(startTime + 0.2);
+  }
+
+  // 808-style kick
+  function playKick(startTime) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(160, startTime);
+    osc.frequency.exponentialRampToValueAtTime(40, startTime + 0.15);
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.25, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
+
+    // Click transient
+    const click = audioCtx.createOscillator();
+    click.type = 'square';
+    click.frequency.value = 800;
+
+    const clickGain = audioCtx.createGain();
+    clickGain.gain.setValueAtTime(0.06, startTime);
+    clickGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.02);
+
+    osc.connect(gain).connect(audioCtx.destination);
+    click.connect(clickGain).connect(audioCtx.destination);
+
+    osc.start(startTime);
+    osc.stop(startTime + 0.4);
+    click.start(startTime);
+    click.stop(startTime + 0.03);
+  }
+
+  // Retro "swoosh" - filtered sweep for stripe animation
+  function playSwoosh(startTime, panValue, freqStart) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(freqStart, startTime);
+    osc.frequency.exponentialRampToValueAtTime(freqStart * 0.3, startTime + 0.6);
+
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(freqStart * 4, startTime);
+    lp.frequency.exponentialRampToValueAtTime(200, startTime + 0.6);
+    lp.Q.value = 6;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.06, startTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.6);
+
+    const panner = audioCtx.createStereoPanner();
+    panner.pan.setValueAtTime(panValue, startTime);
+    panner.pan.linearRampToValueAtTime(0, startTime + 0.5);
+
+    osc.connect(lp).connect(gain).connect(panner).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + 0.7);
+  }
+
+  // Big synth "reveal" chord
+  function playRevealChord(startTime) {
+    const freqs = [130.81, 164.81, 196, 261.63, 329.63]; // C major spread
+    freqs.forEach(f => {
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = f;
+
+      const osc2 = audioCtx.createOscillator();
+      osc2.type = 'sawtooth';
+      osc2.frequency.value = f * 1.005; // slight detune for width
+
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(300, startTime);
+      lp.frequency.linearRampToValueAtTime(4000, startTime + 0.3);
+      lp.frequency.exponentialRampToValueAtTime(1000, startTime + 1.5);
+      lp.Q.value = 1;
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.03, startTime + 0.15);
+      gain.gain.setValueAtTime(0.03, startTime + 0.8);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 2);
+
+      const merger = audioCtx.createGain();
+      merger.gain.value = 0.5;
+
+      osc.connect(merger);
+      osc2.connect(merger);
+      merger.connect(lp).connect(gain).connect(audioCtx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + 2.2);
+      osc2.start(startTime);
+      osc2.stop(startTime + 2.2);
+    });
+  }
+
+  function playAllSounds() {
+    const t = audioCtx.currentTime + 0.05;
+
+    // Phase 1: Sun rise (t+0 to t+1.5) - warm pad fades in
+    playSynthPad(t, 4, 130.81); // C3
+    playSynthPad(t + 0.1, 3.8, 196); // G3
+
+    // Phase 2: Grid + stars appear (t+0.8) - kick drum
+    playKick(t + 0.8);
+
+    // Phase 3: Stripe ribbons swoosh in (t+1.2 to t+2.0)
+    playSwoosh(t + 1.2, -0.8, 800);
+    playSwoosh(t + 1.35, -0.5, 1000);
+    playSwoosh(t + 1.5, -0.3, 1200);
+    playSwoosh(t + 1.4, 0.8, 900);
+    playSwoosh(t + 1.55, 0.5, 1100);
+    playSwoosh(t + 1.7, 0.3, 1300);
+
+    // Phase 4: Title slam (t+2.0) - reveal chord + kick
+    playRevealChord(t + 2.0);
+    playKick(t + 2.0);
+    playSnare(t + 2.05);
+
+    // Phase 5: Arp for "500" (t+2.8)
+    const arpNotes = [523.25, 659.25, 783.99, 1046.5, 783.99, 659.25]; // C5-E5-G5-C6
+    playArp(t + 2.8, arpNotes, 0.12);
+
+    // Phase 6: Final beats for tagline + stripes
+    playKick(t + 3.6);
+    playSnare(t + 3.8);
+    playKick(t + 4.0);
+  }
+
+  // ══════════════════════════════════════════════
+  //  VISUAL ANIMATION
+  // ══════════════════════════════════════════════
+  function startAnimation() {
+    document.getElementById('startPrompt').style.display = 'none';
+
+    const sunsetBg = document.getElementById('sunsetBg');
+    const sunsetLines = document.getElementById('sunsetLines');
+    const gridFloor = document.getElementById('gridFloor');
+    const starsEl = document.getElementById('stars');
+    const logoWrapper = document.getElementById('logoWrapper');
+    const logoTitle = document.getElementById('logoTitle');
+    const logoShadow = document.getElementById('logoShadow');
+    const logo500 = document.getElementById('logo500');
+    const logoTagline = document.getElementById('logoTagline');
+    const threeStripes = document.getElementById('threeStripes');
+    const vhsOverlay = document.getElementById('vhsOverlay');
+
+    // Phase 1: Sunset rises (0ms)
+    sunsetBg.style.animation = 'sunRise 1.8s 0s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+
+    // Stars twinkle in
+    setTimeout(() => {
+      starsEl.style.animation = 'fadeIn 1s forwards';
+    }, 300);
+
+    // Sunset scan lines
+    setTimeout(() => {
+      sunsetLines.style.animation = 'fadeIn 0.5s forwards';
+    }, 800);
+
+    // Phase 2: Grid appears (800ms)
+    setTimeout(() => {
+      gridFloor.style.animation = 'gridAppear 1s forwards';
+    }, 800);
+
+    // Phase 3: Stripe ribbons from sides (1200ms)
+    const svg = document.getElementById('ribbonSvg');
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const CX = W / 2;
+    const CY = H / 2;
+
+    setTimeout(() => {
+      const stripeConfigs = [
+        // Left stripes (adidas-style, parallel)
+        { startX: -50, startY: CY - 50, endX: CX + 200, endY: CY - 30, color: '#FF6B9D', w: 8, delay: 0 },
+        { startX: -50, startY: CY - 20, endX: CX + 200, endY: CY,      color: '#C44DFF', w: 8, delay: 0.15 },
+        { startX: -50, startY: CY + 10, endX: CX + 200, endY: CY + 30, color: '#4DCCFF', w: 8, delay: 0.3 },
+        // Right stripes
+        { startX: W+50, startY: CY - 40, endX: CX - 200, endY: CY - 20, color: '#FFE156', w: 6, delay: 0.1 },
+        { startX: W+50, startY: CY + 5,  endX: CX - 200, endY: CY + 10, color: '#FF8C42', w: 6, delay: 0.25 },
+        { startX: W+50, startY: CY + 40, endX: CX - 200, endY: CY + 40, color: '#48E5C2', w: 6, delay: 0.4 },
+      ];
+
+      stripeConfigs.forEach(cfg => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        // Gentle curve
+        const midY = (cfg.startY + cfg.endY) / 2 + (Math.random() - 0.5) * 30;
+        const cp1x = cfg.startX < CX ? W * 0.3 : W * 0.7;
+        const cp2x = cfg.startX < CX ? W * 0.6 : W * 0.4;
+
+        path.setAttribute('d', `M ${cfg.startX} ${cfg.startY} C ${cp1x} ${midY}, ${cp2x} ${midY}, ${cfg.endX} ${cfg.endY}`);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', cfg.color);
+        path.setAttribute('stroke-width', cfg.w);
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('opacity', '0.6');
+        path.style.strokeDasharray = '2000';
+        path.style.strokeDashoffset = '2000';
+        path.style.animation = `stripeSlide 0.8s ${cfg.delay}s cubic-bezier(0.22, 1, 0.36, 1) forwards`;
+        svg.appendChild(path);
+      });
+    }, 1200);
+
+    // Phase 4: Title slams in (2000ms)
+    setTimeout(() => {
+      logoWrapper.style.opacity = '1';
+      logoTitle.style.animation = 'slideInTitle 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+      logoShadow.style.animation = 'slideInTitle 0.5s 0.05s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+    }, 2000);
+
+    // Phase 5: 500 expands (2800ms)
+    setTimeout(() => {
+      logo500.style.animation = 'expand500 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+    }, 2800);
+
+    // Phase 6: Tagline + three stripes + VHS overlay (3600ms)
+    setTimeout(() => {
+      logoTagline.style.animation = 'fadeIn 0.6s forwards';
+      threeStripes.style.animation = 'fadeIn 0.6s 0.2s forwards';
+      vhsOverlay.style.animation = 'fadeIn 0.5s forwards';
+    }, 3600);
+  }
+
+  // ══════════════════════════════════════════════
+  //  START ON CLICK
+  // ══════════════════════════════════════════════
+  let started = false;
+  document.getElementById('splash').addEventListener('click', () => {
+    if (started) return;
+    started = true;
+    initAudio();
+    playAllSounds();
+    startAnimation();
+  });
+
+})();
+</script>
+
+</body>
+</html>

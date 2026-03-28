@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE156"/>
+      <stop offset="30%" style="stop-color:#FF8C42"/>
+      <stop offset="60%" style="stop-color:#FF6B9D"/>
+      <stop offset="100%" style="stop-color:#C44DFF"/>
+    </linearGradient>
+    <linearGradient id="textGrad80" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE156"/>
+      <stop offset="50%" style="stop-color:#FF6B9D"/>
+      <stop offset="100%" style="stop-color:#C44DFF"/>
+    </linearGradient>
+    <clipPath id="sunClip">
+      <rect x="106" y="120" width="300" height="150"/>
+    </clipPath>
+    <clipPath id="iconClip">
+      <rect x="0" y="0" width="512" height="512" rx="96"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#0a0a2e"/>
+
+  <!-- Stars -->
+  <g opacity="0.5" clip-path="url(#iconClip)">
+    <circle cx="80" cy="60" r="1.5" fill="#fff"/>
+    <circle cx="150" cy="40" r="1" fill="#fff"/>
+    <circle cx="230" cy="70" r="1.5" fill="#fff"/>
+    <circle cx="320" cy="30" r="1" fill="#fff"/>
+    <circle cx="400" cy="55" r="2" fill="#fff"/>
+    <circle cx="450" cy="80" r="1" fill="#fff"/>
+    <circle cx="60" cy="120" r="1" fill="#fff"/>
+    <circle cx="440" cy="130" r="1.5" fill="#fff"/>
+    <circle cx="190" cy="110" r="1" fill="#fff"/>
+    <circle cx="370" cy="100" r="1" fill="#fff"/>
+  </g>
+
+  <!-- Sunset circle (clipped to top half) -->
+  <g clip-path="url(#sunClip)">
+    <circle cx="256" cy="270" r="140" fill="url(#sunGrad)" opacity="0.7"/>
+    <!-- Scan lines -->
+    <g opacity="0.7">
+      <rect x="106" y="185" width="300" height="5" fill="#0a0a2e"/>
+      <rect x="106" y="198" width="300" height="4" fill="#0a0a2e"/>
+      <rect x="106" y="210" width="300" height="6" fill="#0a0a2e"/>
+      <rect x="106" y="225" width="300" height="5" fill="#0a0a2e"/>
+      <rect x="106" y="238" width="300" height="7" fill="#0a0a2e"/>
+      <rect x="106" y="253" width="300" height="8" fill="#0a0a2e"/>
+    </g>
+  </g>
+
+  <!-- Grid floor (simplified perspective lines) -->
+  <g opacity="0.3" stroke="#C44DFF" stroke-width="1" clip-path="url(#iconClip)">
+    <!-- Vertical converging lines -->
+    <line x1="256" y1="280" x2="56" y2="512"/>
+    <line x1="256" y1="280" x2="136" y2="512"/>
+    <line x1="256" y1="280" x2="216" y2="512"/>
+    <line x1="256" y1="280" x2="296" y2="512"/>
+    <line x1="256" y1="280" x2="376" y2="512"/>
+    <line x1="256" y1="280" x2="456" y2="512"/>
+    <!-- Horizontal lines -->
+    <line x1="80" y1="360" x2="432" y2="360"/>
+    <line x1="40" y1="410" x2="472" y2="410"/>
+    <line x1="0" y1="460" x2="512" y2="460"/>
+  </g>
+
+  <!-- Three diagonal stripes (retro adidas) -->
+  <g opacity="0.5" clip-path="url(#iconClip)">
+    <rect x="-50" y="270" width="620" height="10" rx="5" fill="#FF6B9D" transform="rotate(-8, 256, 280)"/>
+    <rect x="-50" y="292" width="620" height="10" rx="5" fill="#C44DFF" transform="rotate(-8, 256, 300)"/>
+    <rect x="-50" y="314" width="620" height="10" rx="5" fill="#4DCCFF" transform="rotate(-8, 256, 320)"/>
+  </g>
+
+  <!-- CL text emblem (compact for icon) -->
+  <text x="256" y="250" text-anchor="middle" font-family="'Righteous', 'Arial Rounded MT Bold', sans-serif"
+    font-size="100" fill="url(#textGrad80)" letter-spacing="6"
+    style="filter: drop-shadow(0 0 15px rgba(255,107,157,0.5))">
+    CL
+  </text>
+  <text x="256" y="310" text-anchor="middle" font-family="'Righteous', 'Arial Rounded MT Bold', sans-serif"
+    font-size="52" fill="#4DCCFF" letter-spacing="14"
+    style="filter: drop-shadow(0 0 10px rgba(77,204,255,0.4))">
+    500
+  </text>
+</svg>
