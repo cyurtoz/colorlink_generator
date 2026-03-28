@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
 
-  <!-- C: large arc (coral, 100% weight) -->
-  <path d="M 310 105 A 160 160 0 1 0 310 405"
-    stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-  <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-  <circle cx="310" cy="405" r="32" fill="#E8785E"/>
+  <!-- C: rounded rectangular open shape (ovalish, open on right) -->
+  <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+    stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+  <circle cx="270" cy="410" r="32" fill="#E8785E"/>
 
-  <!-- L: angular path, bottom-right quadrant (~70% weight) -->
-  <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+  <!-- L: separate, to the right, clear gap from C (~70% weight) -->
+  <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
     stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-  <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+  <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+  <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
 </svg>

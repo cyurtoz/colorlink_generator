@@ -59,13 +59,8 @@
     text-transform: uppercase;
   }
 
-  .icon-bg-light { background: #f7f5f2; }
-  .icon-bg-dark  { background: #1e1e2a; }
-  .icon-bg-warm  { background: #f0ece6; }
-
   svg { border-radius: 22%; }
 
-  /* Wordmark section */
   .wordmark-row {
     display: flex;
     gap: 50px;
@@ -87,9 +82,7 @@
     color: #2d2d2d;
   }
 
-  .wordmark-dark .wordmark-text {
-    color: #f0ece6;
-  }
+  .wordmark-dark .wordmark-text { color: #f0ece6; }
 
   .wordmark-dark {
     background: #1e1e2a;
@@ -97,7 +90,6 @@
     border-radius: 14px;
   }
 
-  /* Size test row */
   .size-row {
     display: flex;
     gap: 30px;
@@ -124,62 +116,58 @@
 
 <!--
   LOGO CONCEPT:
-  C = large arc path (almost full circle), coral #E8785E, thicker stroke
-  L = angular path in bottom-right quadrant, ocean #5B8FB9, ~70% stroke
-  Both have 2 endpoint dots each (4 total)
-  Rounded corners, same grid system
+  C = rounded-rectangular open path (ovalish, open on right), coral #E8785E, 100% weight
+  L = angular path, positioned to the right with clear gap from C, ocean #5B8FB9, ~70% weight
+  2 paths, 4 endpoints, NOT touching each other
 -->
 
 <!-- ==================== VARIATION 1: MINIMAL ==================== -->
 <p class="section-label">Variation 1 - Minimal</p>
 <div class="row">
 
-  <!-- Dark bg -->
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <!-- C: large arc from top to bottom-left -->
-      <path d="M 300 120 A 155 155 0 1 0 300 390"
-        stroke="#E8785E" stroke-width="36" stroke-linecap="round" fill="none"/>
-      <circle cx="300" cy="120" r="30" fill="#E8785E"/>
-      <circle cx="300" cy="390" r="30" fill="#E8785E"/>
-      <!-- L: inside bottom-right -->
-      <path d="M 290 200 L 290 340 Q 290 365, 315 365 L 390 365"
+      <!-- C: rounded rectangular, open right -->
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="30" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="30" fill="#E8785E"/>
+      <!-- L: separate, to the right -->
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="290" cy="200" r="22" fill="#5B8FB9"/>
-      <circle cx="390" cy="365" r="22" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="22" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="22" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">Dark</span>
   </div>
 
-  <!-- Light bg -->
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
-      <path d="M 300 120 A 155 155 0 1 0 300 390"
-        stroke="#E8785E" stroke-width="36" stroke-linecap="round" fill="none"/>
-      <circle cx="300" cy="120" r="30" fill="#E8785E"/>
-      <circle cx="300" cy="390" r="30" fill="#E8785E"/>
-      <path d="M 290 200 L 290 340 Q 290 365, 315 365 L 390 365"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="30" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="30" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="290" cy="200" r="22" fill="#5B8FB9"/>
-      <circle cx="390" cy="365" r="22" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="22" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="22" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">Light</span>
   </div>
 
-  <!-- Warm bg -->
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f0ece6"/>
-      <path d="M 300 120 A 155 155 0 1 0 300 390"
-        stroke="#E8785E" stroke-width="36" stroke-linecap="round" fill="none"/>
-      <circle cx="300" cy="120" r="30" fill="#E8785E"/>
-      <circle cx="300" cy="390" r="30" fill="#E8785E"/>
-      <path d="M 290 200 L 290 340 Q 290 365, 315 365 L 390 365"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="30" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="30" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="290" cy="200" r="22" fill="#5B8FB9"/>
-      <circle cx="390" cy="365" r="22" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="22" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="22" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">Warm</span>
   </div>
@@ -192,16 +180,14 @@
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <!-- C: arc with slightly larger gap -->
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <!-- L: roomy, sits comfortably inside -->
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">Dark</span>
   </div>
@@ -209,14 +195,14 @@
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">Light</span>
   </div>
@@ -224,14 +210,14 @@
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f0ece6"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">Warm</span>
   </div>
@@ -244,24 +230,18 @@
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <!-- Subtle glow halos -->
-      <circle cx="256" cy="256" r="180" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.1"/>
-      <circle cx="256" cy="256" r="200" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.05"/>
-      <!-- C -->
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
-      <!-- Tiny inner glow on C endpoints -->
-      <circle cx="310" cy="105" r="12" fill="#f0ece6" opacity="0.3"/>
-      <circle cx="310" cy="405" r="12" fill="#f0ece6" opacity="0.3"/>
-      <!-- L -->
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="100" r="12" fill="#f0ece6" opacity="0.3"/>
+      <circle cx="270" cy="410" r="12" fill="#f0ece6" opacity="0.3"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
-      <circle cx="280" cy="190" r="9" fill="#f0ece6" opacity="0.3"/>
-      <circle cx="400" cy="370" r="9" fill="#f0ece6" opacity="0.3"/>
+      <circle cx="330" cy="170" r="26" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="9" fill="#f0ece6" opacity="0.3"/>
+      <circle cx="420" cy="370" r="9" fill="#f0ece6" opacity="0.3"/>
     </svg>
     <span class="variant-label">Dark</span>
   </div>
@@ -269,19 +249,18 @@
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
-      <circle cx="256" cy="256" r="180" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.08"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="105" r="12" fill="#fff" opacity="0.4"/>
-      <circle cx="310" cy="405" r="12" fill="#fff" opacity="0.4"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="100" r="12" fill="#fff" opacity="0.4"/>
+      <circle cx="270" cy="410" r="12" fill="#fff" opacity="0.4"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
-      <circle cx="280" cy="190" r="9" fill="#fff" opacity="0.4"/>
-      <circle cx="400" cy="370" r="9" fill="#fff" opacity="0.4"/>
+      <circle cx="330" cy="170" r="26" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="9" fill="#fff" opacity="0.4"/>
+      <circle cx="420" cy="370" r="9" fill="#fff" opacity="0.4"/>
     </svg>
     <span class="variant-label">Light</span>
   </div>
@@ -289,19 +268,18 @@
   <div class="variant">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f0ece6"/>
-      <circle cx="256" cy="256" r="180" fill="none" stroke="#E8785E" stroke-width="1" opacity="0.08"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="105" r="12" fill="#fff" opacity="0.35"/>
-      <circle cx="310" cy="405" r="12" fill="#fff" opacity="0.35"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="100" r="12" fill="#fff" opacity="0.35"/>
+      <circle cx="270" cy="410" r="12" fill="#fff" opacity="0.35"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
-      <circle cx="280" cy="190" r="9" fill="#fff" opacity="0.35"/>
-      <circle cx="400" cy="370" r="9" fill="#fff" opacity="0.35"/>
+      <circle cx="330" cy="170" r="26" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="9" fill="#fff" opacity="0.35"/>
+      <circle cx="420" cy="370" r="9" fill="#fff" opacity="0.35"/>
     </svg>
     <span class="variant-label">Warm</span>
   </div>
@@ -314,14 +292,14 @@
   <div class="wordmark">
     <svg width="44" height="44" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#f0ece6"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="wordmark-text">ColorLink</span>
   </div>
@@ -329,14 +307,14 @@
   <div class="wordmark wordmark-dark">
     <svg width="44" height="44" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="wordmark-text">ColorLink</span>
   </div>
@@ -350,14 +328,14 @@
   <div class="size-item">
     <svg width="48" height="48" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="42" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="34" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="26" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="26" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="26" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="26" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">48px</span>
   </div>
@@ -365,14 +343,14 @@
   <div class="size-item">
     <svg width="64" height="64" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="40" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="34" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="34" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="34" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="34" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">64px</span>
   </div>
@@ -380,14 +358,14 @@
   <div class="size-item">
     <svg width="96" height="96" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">96px</span>
   </div>
@@ -395,14 +373,14 @@
   <div class="size-item">
     <svg width="140" height="140" viewBox="0 0 512 512">
       <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
-      <path d="M 310 105 A 160 160 0 1 0 310 405"
-        stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"/>
-      <circle cx="310" cy="105" r="32" fill="#E8785E"/>
-      <circle cx="310" cy="405" r="32" fill="#E8785E"/>
-      <path d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      <path d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+        stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="270" cy="100" r="32" fill="#E8785E"/>
+      <circle cx="270" cy="410" r="32" fill="#E8785E"/>
+      <path d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
         stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="280" cy="190" r="24" fill="#5B8FB9"/>
-      <circle cx="400" cy="370" r="24" fill="#5B8FB9"/>
+      <circle cx="330" cy="170" r="24" fill="#5B8FB9"/>
+      <circle cx="420" cy="370" r="24" fill="#5B8FB9"/>
     </svg>
     <span class="variant-label">140px</span>
   </div>

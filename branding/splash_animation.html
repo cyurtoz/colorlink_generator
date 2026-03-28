@@ -52,20 +52,20 @@
 <div class="splash">
   <svg class="logo-svg" id="logoSvg" width="200" height="200" viewBox="0 0 512 512">
     <!-- 4 endpoint dots (appear first as the "puzzle") -->
-    <circle id="dotC1" cx="310" cy="105" r="0" fill="#E8785E"/>
-    <circle id="dotC2" cx="310" cy="405" r="0" fill="#E8785E"/>
-    <circle id="dotL1" cx="280" cy="190" r="0" fill="#5B8FB9"/>
-    <circle id="dotL2" cx="400" cy="370" r="0" fill="#5B8FB9"/>
+    <circle id="dotC1" cx="270" cy="100" r="0" fill="#E8785E"/>
+    <circle id="dotC2" cx="270" cy="410" r="0" fill="#E8785E"/>
+    <circle id="dotL1" cx="330" cy="170" r="0" fill="#5B8FB9"/>
+    <circle id="dotL2" cx="420" cy="370" r="0" fill="#5B8FB9"/>
 
-    <!-- C path (large arc) - drawn after dots -->
+    <!-- C path (rounded rectangular, open right) - drawn after dots -->
     <path id="pathC"
-      d="M 310 105 A 160 160 0 1 0 310 405"
-      stroke="#E8785E" stroke-width="38" stroke-linecap="round" fill="none"
+      d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+      stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"
       stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
 
-    <!-- L path (angular, inside C) - drawn after C -->
+    <!-- L path (separate, to the right of C) - drawn after C -->
     <path id="pathL"
-      d="M 280 190 L 280 340 Q 280 370, 310 370 L 400 370"
+      d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
       stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"
       stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
   </svg>
