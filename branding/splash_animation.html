@@ -51,21 +51,43 @@
 
 <div class="splash">
   <svg class="logo-svg" id="logoSvg" width="200" height="200" viewBox="0 0 512 512">
-    <!-- 4 endpoint dots (appear first as the "puzzle") -->
-    <circle id="dotC1" cx="270" cy="100" r="0" fill="#E8785E"/>
-    <circle id="dotC2" cx="270" cy="410" r="0" fill="#E8785E"/>
-    <circle id="dotL1" cx="330" cy="170" r="0" fill="#5B8FB9"/>
-    <circle id="dotL2" cx="420" cy="370" r="0" fill="#5B8FB9"/>
+    <defs>
+      <!-- Glow filters for the electric flow effect -->
+      <filter id="glowC" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+      <filter id="glowL" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+    </defs>
 
-    <!-- C path (rounded rectangular, open right) - drawn after dots -->
+    <!-- Glow layers (hidden, revealed after paths connect) -->
+    <path id="glowPathC"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+      stroke="#E8785E" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#glowC)"/>
+    <path id="glowPathL"
+      d="M 200 175 L 200 330 Q 200 355, 225 355 L 280 355"
+      stroke="#5B8FB9" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#glowL)"/>
+
+    <!-- 4 endpoint dots (appear first as the "puzzle") -->
+    <circle id="dotC1" cx="310" cy="90" r="0" fill="#E8785E"/>
+    <circle id="dotC2" cx="310" cy="420" r="0" fill="#E8785E"/>
+    <circle id="dotL1" cx="200" cy="175" r="0" fill="#5B8FB9"/>
+    <circle id="dotL2" cx="280" cy="355" r="0" fill="#5B8FB9"/>
+
+    <!-- C path (rounded rectangular, open right) -->
     <path id="pathC"
-      d="M 270 100 L 150 100 Q 90 100, 90 160 L 90 350 Q 90 410, 150 410 L 270 410"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
       stroke="#E8785E" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"
       stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
 
-    <!-- L path (separate, to the right of C) - drawn after C -->
+    <!-- L path (embedded inside C) -->
     <path id="pathL"
-      d="M 330 170 L 330 340 Q 330 370, 360 370 L 420 370"
+      d="M 200 175 L 200 330 Q 200 355, 225 355 L 280 355"
       stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"
       stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
   </svg>
@@ -153,22 +175,17 @@
   const t = audioCtx.currentTime + 0.3;
 
   // Schedule all sounds
-  playPad(t, 4.5);
+  playPad(t, 5);
 
-  // Dot pops (t+0.3 to t+0.9)
   playPop(t + 0.3, 440);    // C dot 1
   playPop(t + 0.55, 494);   // C dot 2
   playPop(t + 0.8, 523);    // L dot 1
   playPop(t + 1.0, 587);    // L dot 2
 
-  // C path draw (t+1.3)
-  playDraw(t + 1.3, 1.0, 349);
+  playDraw(t + 1.3, 1.0, 349);   // C path
+  playDraw(t + 2.0, 0.7, 392);   // L path
 
-  // L path draw (t+2.0)
-  playDraw(t + 2.0, 0.7, 392);
-
-  // Completion pulse (t+2.9)
-  playPulse(t + 2.9);
+  playPulse(t + 2.9);            // completion
 
   // ── Visual sequence ──
   const dotC1 = document.getElementById('dotC1');
@@ -177,19 +194,18 @@
   const dotL2 = document.getElementById('dotL2');
   const pathC = document.getElementById('pathC');
   const pathL = document.getElementById('pathL');
+  const glowPathC = document.getElementById('glowPathC');
+  const glowPathL = document.getElementById('glowPathL');
   const wordmark = document.getElementById('wordmark');
 
-  // Utility: animate dot radius with spring
   function popDot(el, targetR, delay) {
     setTimeout(() => {
-      el.style.transition = `r 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)`;
+      el.style.transition = 'r 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
       el.setAttribute('r', targetR);
     }, delay);
   }
 
-  // Utility: draw path
   function drawPath(el, delay, duration) {
-    // Measure real length
     const len = el.getTotalLength();
     el.setAttribute('stroke-dasharray', len);
     el.setAttribute('stroke-dashoffset', len);
@@ -201,20 +217,21 @@
     }, delay);
   }
 
-  // PHASE 1: Dots appear (like puzzle clues being placed)
-  popDot(dotC1, 32, 300);    // C endpoint 1
-  popDot(dotC2, 32, 550);    // C endpoint 2
-  popDot(dotL1, 24, 800);    // L endpoint 1
-  popDot(dotL2, 24, 1000);   // L endpoint 2
+  // PHASE 1: Dots appear
+  popDot(dotC1, 32, 300);
+  popDot(dotC2, 32, 550);
+  popDot(dotL1, 24, 800);
+  popDot(dotL2, 24, 1000);
 
-  // PHASE 2: C path draws (connecting its dots)
+  // PHASE 2: C path draws
   drawPath(pathC, 1300, 1000);
 
-  // PHASE 3: L path draws (connecting its dots)
+  // PHASE 3: L path draws
   drawPath(pathL, 2000, 700);
 
-  // PHASE 4: Completion pulse - dots briefly scale up then settle
+  // PHASE 4: Completion pulse + electric glow
   setTimeout(() => {
+    // Dot pulse
     [dotC1, dotC2, dotL1, dotL2].forEach((d, i) => {
       const baseR = i < 2 ? 32 : 24;
       const pulseR = i < 2 ? 38 : 29;
@@ -227,9 +244,23 @@
         d.setAttribute('r', baseR);
       }, 200);
     });
+
+    // Subtle electric glow - fades in softly, then settles to very light
+    glowPathC.style.transition = 'opacity 0.4s ease-out';
+    glowPathC.setAttribute('opacity', '0.25');
+    glowPathL.style.transition = 'opacity 0.4s ease-out';
+    glowPathL.setAttribute('opacity', '0.25');
+
+    // Glow settles down to a very subtle resting state
+    setTimeout(() => {
+      glowPathC.style.transition = 'opacity 0.8s ease-in-out';
+      glowPathC.setAttribute('opacity', '0.1');
+      glowPathL.style.transition = 'opacity 0.8s ease-in-out';
+      glowPathL.setAttribute('opacity', '0.1');
+    }, 500);
   }, 2900);
 
-  // PHASE 5: Wordmark fades in, then everything is static
+  // PHASE 5: Wordmark fades in, then static
   setTimeout(() => {
     wordmark.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
     wordmark.style.opacity = '1';
