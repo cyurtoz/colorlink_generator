@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorLink Neon - Splash Screen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #08080F;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .splash {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-svg { position: relative; z-index: 2; }
+
+  .wordmark {
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+    font-size: clamp(24px, 4vw, 40px);
+    letter-spacing: 3px;
+    color: #eee;
+    margin-top: 20px;
+    opacity: 0;
+  }
+
+  .wordmark sup {
+    font-size: 14px;
+    font-weight: 400;
+    color: #FF2D78;
+    letter-spacing: 1px;
+    position: relative;
+    top: -12px;
+    margin-left: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="splash">
+  <svg class="logo-svg" id="logoSvg" width="200" height="200" viewBox="0 0 512 512">
+    <defs>
+      <filter id="glowC" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+      <filter id="glowL" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+      <filter id="brightGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="18"/>
+      </filter>
+    </defs>
+
+    <!-- Deep background glow (builds up at end) -->
+    <path id="bgGlowC"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+      stroke="#FF2D78" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#brightGlow)"/>
+    <path id="bgGlowL"
+      d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+      stroke="#00E5FF" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#brightGlow)"/>
+
+    <!-- Inner glow layer -->
+    <path id="glowPathC"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+      stroke="#FF2D78" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#glowC)"/>
+    <path id="glowPathL"
+      d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+      stroke="#00E5FF" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#glowL)"/>
+
+    <!-- Endpoint dots -->
+    <circle id="dotC1" cx="310" cy="90" r="0" fill="#FF2D78"/>
+    <circle id="dotC2" cx="310" cy="420" r="0" fill="#FF2D78"/>
+    <circle id="dotL1" cx="158" cy="175" r="0" fill="#00E5FF"/>
+    <circle id="dotL2" cx="305" cy="342" r="0" fill="#00E5FF"/>
+
+    <!-- Main paths -->
+    <path id="pathC"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+      stroke="#FF2D78" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
+
+    <path id="pathL"
+      d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+      stroke="#00E5FF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
+
+    <!-- Bright dot centers (appear at end) -->
+    <circle id="brightC1" cx="310" cy="90" r="0" fill="#fff" opacity="0"/>
+    <circle id="brightC2" cx="310" cy="420" r="0" fill="#fff" opacity="0"/>
+    <circle id="brightL1" cx="158" cy="175" r="0" fill="#fff" opacity="0"/>
+    <circle id="brightL2" cx="305" cy="342" r="0" fill="#fff" opacity="0"/>
+  </svg>
+
+  <div class="wordmark" id="wordmark">ColorLink<sup>neon</sup></div>
+</div>
+
+<script>
+(function() {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Dark ambient drone
+  function playDrone(startTime, duration) {
+    [65.41, 98.0, 130.81].forEach(f => { // C2, G2, C3 - deep power chord
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = f;
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.value = 300;
+      lp.Q.value = 1;
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0, startTime);
+      g.gain.linearRampToValueAtTime(0.012, startTime + 1);
+      g.gain.setValueAtTime(0.012, startTime + duration - 1);
+      g.gain.linearRampToValueAtTime(0, startTime + duration);
+      osc.connect(lp).connect(g).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    });
+  }
+
+  // Electric zap for dots
+  function playZap(startTime, freq) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq * 2, startTime);
+    osc.frequency.exponentialRampToValueAtTime(freq, startTime + 0.08);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(4000, startTime);
+    lp.frequency.exponentialRampToValueAtTime(500, startTime + 0.15);
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0.08, startTime);
+    g.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+    osc.connect(lp).connect(g).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + 0.2);
+  }
+
+  // Electric draw (buzz)
+  function playBuzz(startTime, duration, freq) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(freq, startTime);
+    osc.frequency.linearRampToValueAtTime(freq * 1.2, startTime + duration);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(800, startTime);
+    lp.frequency.linearRampToValueAtTime(2000, startTime + duration);
+    lp.Q.value = 3;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0, startTime);
+    g.gain.linearRampToValueAtTime(0.03, startTime + 0.1);
+    g.gain.setValueAtTime(0.03, startTime + duration * 0.8);
+    g.gain.linearRampToValueAtTime(0, startTime + duration);
+    osc.connect(lp).connect(g).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  }
+
+  // Power-up swell (brighter at end)
+  function playPowerUp(startTime) {
+    [261.63, 329.63, 392, 523.25, 659.25].forEach((f, i) => {
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = f;
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(500, startTime);
+      lp.frequency.linearRampToValueAtTime(3000, startTime + 0.6);
+      lp.frequency.linearRampToValueAtTime(1500, startTime + 1.5);
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0, startTime + i * 0.03);
+      g.gain.linearRampToValueAtTime(0.02, startTime + 0.3);
+      g.gain.setValueAtTime(0.02, startTime + 0.8);
+      g.gain.exponentialRampToValueAtTime(0.001, startTime + 1.8);
+      osc.connect(lp).connect(g).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + 2);
+    });
+  }
+
+  const t = audioCtx.currentTime + 0.3;
+
+  playDrone(t, 5);
+  playZap(t + 0.3, 440);
+  playZap(t + 0.5, 494);
+  playZap(t + 0.7, 523);
+  playZap(t + 0.9, 587);
+  playBuzz(t + 1.2, 1.0, 220);
+  playBuzz(t + 1.9, 0.7, 277);
+  playPowerUp(t + 2.8);
+
+  // ── Visual ──
+  const dotC1 = document.getElementById('dotC1');
+  const dotC2 = document.getElementById('dotC2');
+  const dotL1 = document.getElementById('dotL1');
+  const dotL2 = document.getElementById('dotL2');
+  const pathC = document.getElementById('pathC');
+  const pathL = document.getElementById('pathL');
+  const glowPathC = document.getElementById('glowPathC');
+  const glowPathL = document.getElementById('glowPathL');
+  const bgGlowC = document.getElementById('bgGlowC');
+  const bgGlowL = document.getElementById('bgGlowL');
+  const brightC1 = document.getElementById('brightC1');
+  const brightC2 = document.getElementById('brightC2');
+  const brightL1 = document.getElementById('brightL1');
+  const brightL2 = document.getElementById('brightL2');
+  const wordmark = document.getElementById('wordmark');
+
+  function popDot(el, targetR, delay) {
+    setTimeout(() => {
+      el.style.transition = 'r 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      el.setAttribute('r', targetR);
+    }, delay);
+  }
+
+  function drawPath(el, delay, duration) {
+    const len = el.getTotalLength();
+    el.setAttribute('stroke-dasharray', len);
+    el.setAttribute('stroke-dashoffset', len);
+    el.setAttribute('opacity', '1');
+    setTimeout(() => {
+      el.style.transition = `stroke-dashoffset ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      el.setAttribute('stroke-dashoffset', '0');
+    }, delay);
+  }
+
+  // Dots snap in
+  popDot(dotC1, 30, 300);
+  popDot(dotC2, 30, 500);
+  popDot(dotL1, 30, 700);
+  popDot(dotL2, 30, 900);
+
+  // Paths draw
+  drawPath(pathC, 1200, 1000);
+  drawPath(pathL, 1900, 700);
+
+  // PHASE 4: Neon power-up — glow intensifies, then holds bright
+  setTimeout(() => {
+    // Dot pulse
+    [dotC1, dotC2, dotL1, dotL2].forEach(d => {
+      d.style.transition = 'r 0.15s ease-out';
+      d.setAttribute('r', '36');
+      setTimeout(() => {
+        d.style.transition = 'r 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        d.setAttribute('r', '30');
+      }, 150);
+    });
+
+    // Inner glow appears
+    glowPathC.style.transition = 'opacity 0.3s ease-out';
+    glowPathC.setAttribute('opacity', '0.4');
+    glowPathL.style.transition = 'opacity 0.3s ease-out';
+    glowPathL.setAttribute('opacity', '0.4');
+
+    // Background glow swells up
+    bgGlowC.style.transition = 'opacity 0.5s ease-out';
+    bgGlowC.setAttribute('opacity', '0.2');
+    bgGlowL.style.transition = 'opacity 0.5s ease-out';
+    bgGlowL.setAttribute('opacity', '0.2');
+
+    // Settle to bright resting state (brighter than default/zen)
+    setTimeout(() => {
+      glowPathC.style.transition = 'opacity 0.6s ease-in-out';
+      glowPathC.setAttribute('opacity', '0.25');
+      glowPathL.style.transition = 'opacity 0.6s ease-in-out';
+      glowPathL.setAttribute('opacity', '0.25');
+
+      bgGlowC.style.transition = 'opacity 0.8s ease-in-out';
+      bgGlowC.setAttribute('opacity', '0.1');
+      bgGlowL.style.transition = 'opacity 0.8s ease-in-out';
+      bgGlowL.setAttribute('opacity', '0.1');
+
+      // Bright dot centers appear
+      [brightC1, brightC2, brightL1, brightL2].forEach(b => {
+        b.style.transition = 'opacity 0.4s ease, r 0.4s ease';
+        b.setAttribute('r', '10');
+        b.setAttribute('opacity', '0.5');
+      });
+    }, 500);
+  }, 2800);
+
+  setTimeout(() => {
+    wordmark.style.transition = 'opacity 0.6s ease';
+    wordmark.style.opacity = '1';
+  }, 3400);
+
+})();
+</script>
+
+</body>
+</html>

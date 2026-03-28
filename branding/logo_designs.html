@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorLink - Logo Designs (Default, Zen, Neon)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f7f5f2;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    gap: 80px;
+  }
+
+  h1 {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: -40px;
+  }
+
+  .theme-divider {
+    width: 400px;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0 -40px 0;
+  }
+
+  .theme-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: -40px;
+  }
+
+  .row {
+    display: flex;
+    gap: 60px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .variant-label {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #bbb;
+    text-transform: uppercase;
+  }
+
+  svg { border-radius: 22%; }
+
+  .wordmark-row {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .wordmark-text {
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #2d2d2d;
+    position: relative;
+  }
+
+  .wordmark-text sup {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    position: absolute;
+    top: -2px;
+    right: -30px;
+  }
+
+  .wordmark-dark .wordmark-text { color: #f0ece6; }
+
+  .wordmark-dark {
+    background: #1e1e2a;
+    padding: 20px 50px 20px 36px;
+    border-radius: 14px;
+  }
+
+  .size-row {
+    display: flex;
+    gap: 30px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .size-item svg {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+</style>
+</head>
+<body>
+
+<!--
+  ALL THEMES USE:
+  C stroke = 36, L stroke = 36 (equal weight)
+  C dots r=30, L dots r=30 (equal size)
+  42px edge-to-edge gap on left and bottom
+-->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--              DEFAULT THEME                      -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<div class="theme-title">Default</div>
+
+<p class="section-label">Icon + Wordmark</p>
+<div class="row">
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#E8785E"/>
+      <circle cx="310" cy="420" r="30" fill="#E8785E"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#5B8FB9" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#5B8FB9"/>
+      <circle cx="305" cy="342" r="30" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Dark</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f7f5f2"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#E8785E"/>
+      <circle cx="310" cy="420" r="30" fill="#E8785E"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#5B8FB9" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#5B8FB9"/>
+      <circle cx="305" cy="342" r="30" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Light</span>
+  </div>
+
+</div>
+
+<div class="wordmark-row">
+  <div class="wordmark">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#f0ece6"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#E8785E"/>
+      <circle cx="310" cy="420" r="30" fill="#E8785E"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#5B8FB9" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#5B8FB9"/>
+      <circle cx="305" cy="342" r="30" fill="#5B8FB9"/>
+    </svg>
+    <span class="wordmark-text">ColorLink</span>
+  </div>
+  <div class="wordmark wordmark-dark">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#E8785E"/>
+      <circle cx="310" cy="420" r="30" fill="#E8785E"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#5B8FB9" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#5B8FB9"/>
+      <circle cx="305" cy="342" r="30" fill="#5B8FB9"/>
+    </svg>
+    <span class="wordmark-text">ColorLink</span>
+  </div>
+</div>
+
+<div class="theme-divider"></div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--              ZEN THEME                          -->
+<!--  Nature-inspired, relaxing                      -->
+<!--  C: #8B9E74 (sage moss)                        -->
+<!--  L: #C2956B (warm earth)                       -->
+<!--  BG dark: #1C2419  BG light: #F3EDE4           -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<div class="theme-title">Zen</div>
+
+<p class="section-label">Icon + Wordmark</p>
+<div class="row">
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1C2419"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#8B9E74" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#8B9E74"/>
+      <circle cx="310" cy="420" r="30" fill="#8B9E74"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#C2956B" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#C2956B"/>
+      <circle cx="305" cy="342" r="30" fill="#C2956B"/>
+    </svg>
+    <span class="variant-label">Dark</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#F3EDE4"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#8B9E74" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#8B9E74"/>
+      <circle cx="310" cy="420" r="30" fill="#8B9E74"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#C2956B" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#C2956B"/>
+      <circle cx="305" cy="342" r="30" fill="#C2956B"/>
+    </svg>
+    <span class="variant-label">Light</span>
+  </div>
+
+</div>
+
+<div class="wordmark-row">
+  <div class="wordmark">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#F3EDE4"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#8B9E74" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#8B9E74"/>
+      <circle cx="310" cy="420" r="30" fill="#8B9E74"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#C2956B" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#C2956B"/>
+      <circle cx="305" cy="342" r="30" fill="#C2956B"/>
+    </svg>
+    <span class="wordmark-text" style="color:#4A5540">ColorLink<sup style="color:#8B9E74">zen</sup></span>
+  </div>
+  <div class="wordmark wordmark-dark" style="background:#1C2419">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1C2419"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#8B9E74" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#8B9E74"/>
+      <circle cx="310" cy="420" r="30" fill="#8B9E74"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#C2956B" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#C2956B"/>
+      <circle cx="305" cy="342" r="30" fill="#C2956B"/>
+    </svg>
+    <span class="wordmark-text">ColorLink<sup style="color:#8B9E74">zen</sup></span>
+  </div>
+</div>
+
+<div class="theme-divider"></div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--              NEON THEME                         -->
+<!--  Glowing, electric, bright                      -->
+<!--  C: #FF2D78 (hot pink)                         -->
+<!--  L: #00E5FF (electric cyan)                    -->
+<!--  BG: #08080F                                   -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<div class="theme-title">Neon</div>
+
+<p class="section-label">Icon + Wordmark</p>
+<div class="row">
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <defs>
+        <filter id="neonGlowC" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <filter id="neonGlowL" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="#08080F"/>
+      <!-- Glow underlays -->
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" fill="none"
+        opacity="0.35" filter="url(#neonGlowC)"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" fill="none"
+        opacity="0.35" filter="url(#neonGlowL)"/>
+      <!-- Main paths -->
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#FF2D78"/>
+      <circle cx="310" cy="420" r="30" fill="#FF2D78"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#00E5FF"/>
+      <circle cx="305" cy="342" r="30" fill="#00E5FF"/>
+      <!-- Bright dot centers -->
+      <circle cx="310" cy="90" r="10" fill="#fff" opacity="0.4"/>
+      <circle cx="310" cy="420" r="10" fill="#fff" opacity="0.4"/>
+      <circle cx="158" cy="175" r="10" fill="#fff" opacity="0.4"/>
+      <circle cx="305" cy="342" r="10" fill="#fff" opacity="0.4"/>
+    </svg>
+    <span class="variant-label">Dark (primary)</span>
+  </div>
+
+  <div class="variant">
+    <svg width="140" height="140" viewBox="0 0 512 512">
+      <defs>
+        <filter id="neonGlowC2" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <filter id="neonGlowL2" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="#0F0F1A"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"
+        opacity="0.25" filter="url(#neonGlowC2)"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"
+        opacity="0.25" filter="url(#neonGlowL2)"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#FF2D78"/>
+      <circle cx="310" cy="420" r="30" fill="#FF2D78"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#00E5FF"/>
+      <circle cx="305" cy="342" r="30" fill="#00E5FF"/>
+    </svg>
+    <span class="variant-label">Subtle glow</span>
+  </div>
+
+</div>
+
+<div class="wordmark-row">
+  <div class="wordmark wordmark-dark" style="background:#08080F; padding-right:56px;">
+    <svg width="44" height="44" viewBox="0 0 512 512">
+      <defs>
+        <filter id="nGC3" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="7"/>
+        </filter>
+        <filter id="nGL3" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="7"/>
+        </filter>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="#08080F"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="42" fill="none" opacity="0.3" filter="url(#nGC3)"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="42" fill="none" opacity="0.3" filter="url(#nGL3)"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#FF2D78"/>
+      <circle cx="310" cy="420" r="30" fill="#FF2D78"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#00E5FF"/>
+      <circle cx="305" cy="342" r="30" fill="#00E5FF"/>
+    </svg>
+    <span class="wordmark-text" style="color:#eee">ColorLink<sup style="color:#FF2D78">neon</sup></span>
+  </div>
+</div>
+
+<div class="theme-divider"></div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--              SIZE TEST (all themes)              -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<p class="section-label">Size Test - 48px</p>
+<div class="row">
+  <!-- Default 48px -->
+  <div class="variant">
+    <svg width="48" height="48" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#E8785E"/>
+      <circle cx="310" cy="420" r="30" fill="#E8785E"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#5B8FB9" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#5B8FB9"/>
+      <circle cx="305" cy="342" r="30" fill="#5B8FB9"/>
+    </svg>
+    <span class="variant-label">Default</span>
+  </div>
+
+  <!-- Zen 48px -->
+  <div class="variant">
+    <svg width="48" height="48" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#1C2419"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#8B9E74" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#8B9E74"/>
+      <circle cx="310" cy="420" r="30" fill="#8B9E74"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#C2956B" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#C2956B"/>
+      <circle cx="305" cy="342" r="30" fill="#C2956B"/>
+    </svg>
+    <span class="variant-label">Zen</span>
+  </div>
+
+  <!-- Neon 48px -->
+  <div class="variant">
+    <svg width="48" height="48" viewBox="0 0 512 512">
+      <rect width="512" height="512" rx="112" fill="#08080F"/>
+      <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+        stroke="#FF2D78" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="310" cy="90" r="30" fill="#FF2D78"/>
+      <circle cx="310" cy="420" r="30" fill="#FF2D78"/>
+      <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+        stroke="#00E5FF" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="158" cy="175" r="30" fill="#00E5FF"/>
+      <circle cx="305" cy="342" r="30" fill="#00E5FF"/>
+    </svg>
+    <span class="variant-label">Neon</span>
+  </div>
+</div>
+
+</body>
+</html>

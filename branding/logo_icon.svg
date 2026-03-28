@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#1e1e2a"/>
+
+  <!-- C: stroke=36, half=18. Inner left edge: 80+18=98 -->
+  <path d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+    stroke="#E8785E" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="310" cy="90" r="30" fill="#E8785E"/>
+  <circle cx="310" cy="420" r="30" fill="#E8785E"/>
+
+  <!-- L: stroke=36, half=18. Equal 42px gap on left and bottom -->
+  <path d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+    stroke="#5B8FB9" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="158" cy="175" r="30" fill="#5B8FB9"/>
+  <circle cx="305" cy="342" r="30" fill="#5B8FB9"/>
+</svg>

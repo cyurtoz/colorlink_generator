@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorLink Zen - Splash Screen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1C2419;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .splash {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-svg { position: relative; z-index: 2; }
+
+  .wordmark {
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+    font-size: clamp(24px, 4vw, 40px);
+    letter-spacing: 3px;
+    color: #D4CBBD;
+    margin-top: 20px;
+    opacity: 0;
+  }
+
+  .wordmark sup {
+    font-size: 14px;
+    font-weight: 400;
+    color: #8B9E74;
+    letter-spacing: 1px;
+    position: relative;
+    top: -12px;
+    margin-left: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="splash">
+  <svg class="logo-svg" id="logoSvg" width="200" height="200" viewBox="0 0 512 512">
+    <defs>
+      <!-- Soft warm glow for zen -->
+      <filter id="glowC" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+      <filter id="glowL" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+    </defs>
+
+    <path id="glowPathC"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+      stroke="#8B9E74" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#glowC)"/>
+    <path id="glowPathL"
+      d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+      stroke="#C2956B" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      opacity="0" filter="url(#glowL)"/>
+
+    <circle id="dotC1" cx="310" cy="90" r="0" fill="#8B9E74"/>
+    <circle id="dotC2" cx="310" cy="420" r="0" fill="#8B9E74"/>
+    <circle id="dotL1" cx="158" cy="175" r="0" fill="#C2956B"/>
+    <circle id="dotL2" cx="305" cy="342" r="0" fill="#C2956B"/>
+
+    <path id="pathC"
+      d="M 310 90 L 155 90 Q 80 90, 80 165 L 80 345 Q 80 420, 155 420 L 310 420"
+      stroke="#8B9E74" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
+
+    <path id="pathL"
+      d="M 158 175 L 158 312 Q 158 342, 188 342 L 305 342"
+      stroke="#C2956B" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
+  </svg>
+
+  <div class="wordmark" id="wordmark">ColorLink<sup>zen</sup></div>
+</div>
+
+<script>
+(function() {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Zen pad: slower attack, lower, breathy — Dm9 chord (nature/calm)
+  function playPad(startTime, duration) {
+    [146.83, 174.61, 220, 293.66, 329.63].forEach(f => { // D3,F3,A3,D4,E4
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0, startTime);
+      g.gain.linearRampToValueAtTime(0.015, startTime + 1.5);
+      g.gain.setValueAtTime(0.015, startTime + duration - 2);
+      g.gain.linearRampToValueAtTime(0, startTime + duration);
+      osc.connect(g).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    });
+  }
+
+  // Soft wooden "tok" for dots
+  function playTok(startTime, freq) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, startTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.5, startTime + 0.15);
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0.08, startTime);
+    g.gain.exponentialRampToValueAtTime(0.001, startTime + 0.2);
+    osc.connect(g).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + 0.25);
+  }
+
+  // Breathy draw tone
+  function playDraw(startTime, duration, freq) {
+    const osc = audioCtx.createOscillator();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, startTime);
+    osc.frequency.linearRampToValueAtTime(freq * 1.05, startTime + duration);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.value = 600;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(0, startTime);
+    g.gain.linearRampToValueAtTime(0.03, startTime + 0.2);
+    g.gain.setValueAtTime(0.03, startTime + duration * 0.7);
+    g.gain.linearRampToValueAtTime(0, startTime + duration);
+    osc.connect(lp).connect(g).connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  }
+
+  // Gentle bell resolve
+  function playResolve(startTime) {
+    [293.66, 349.23, 440, 523.25].forEach((f, i) => { // Dm → resolve
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0, startTime + i * 0.08);
+      g.gain.linearRampToValueAtTime(0.03, startTime + i * 0.08 + 0.1);
+      g.gain.exponentialRampToValueAtTime(0.001, startTime + 2);
+      osc.connect(g).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + 2.2);
+    });
+  }
+
+  const t = audioCtx.currentTime + 0.3;
+
+  playPad(t, 6);
+  // Slower dot placement (zen = patient)
+  playTok(t + 0.5, 330);
+  playTok(t + 0.9, 370);
+  playTok(t + 1.3, 392);
+  playTok(t + 1.6, 440);
+  playDraw(t + 2.0, 1.2, 293);
+  playDraw(t + 2.8, 0.9, 349);
+  playResolve(t + 3.9);
+
+  // ── Visual (slower, more breathing room) ──
+  const dotC1 = document.getElementById('dotC1');
+  const dotC2 = document.getElementById('dotC2');
+  const dotL1 = document.getElementById('dotL1');
+  const dotL2 = document.getElementById('dotL2');
+  const pathC = document.getElementById('pathC');
+  const pathL = document.getElementById('pathL');
+  const glowPathC = document.getElementById('glowPathC');
+  const glowPathL = document.getElementById('glowPathL');
+  const wordmark = document.getElementById('wordmark');
+
+  function popDot(el, targetR, delay) {
+    setTimeout(() => {
+      el.style.transition = 'r 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      el.setAttribute('r', targetR);
+    }, delay);
+  }
+
+  function drawPath(el, delay, duration) {
+    const len = el.getTotalLength();
+    el.setAttribute('stroke-dasharray', len);
+    el.setAttribute('stroke-dashoffset', len);
+    el.setAttribute('opacity', '1');
+    setTimeout(() => {
+      el.style.transition = `stroke-dashoffset ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      el.setAttribute('stroke-dashoffset', '0');
+    }, delay);
+  }
+
+  // Slower dot placement
+  popDot(dotC1, 30, 500);
+  popDot(dotC2, 30, 900);
+  popDot(dotL1, 30, 1300);
+  popDot(dotL2, 30, 1600);
+
+  drawPath(pathC, 2000, 1200);
+  drawPath(pathL, 2800, 900);
+
+  // Gentle glow (warm, like candlelight)
+  setTimeout(() => {
+    [dotC1, dotC2, dotL1, dotL2].forEach(d => {
+      d.style.transition = 'r 0.3s ease-out';
+      d.setAttribute('r', '35');
+      setTimeout(() => {
+        d.style.transition = 'r 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        d.setAttribute('r', '30');
+      }, 300);
+    });
+
+    glowPathC.style.transition = 'opacity 0.6s ease-out';
+    glowPathC.setAttribute('opacity', '0.15');
+    glowPathL.style.transition = 'opacity 0.6s ease-out';
+    glowPathL.setAttribute('opacity', '0.15');
+
+    setTimeout(() => {
+      glowPathC.style.transition = 'opacity 1.2s ease-in-out';
+      glowPathC.setAttribute('opacity', '0.06');
+      glowPathL.style.transition = 'opacity 1.2s ease-in-out';
+      glowPathL.setAttribute('opacity', '0.06');
+    }, 700);
+  }, 3900);
+
+  setTimeout(() => {
+    wordmark.style.transition = 'opacity 0.8s ease';
+    wordmark.style.opacity = '1';
+  }, 4400);
+
+})();
+</script>
+
+</body>
+</html>
