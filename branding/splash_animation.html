@@ -69,15 +69,15 @@
       stroke="#E8785E" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" fill="none"
       opacity="0" filter="url(#glowC)"/>
     <path id="glowPathL"
-      d="M 200 175 L 200 330 Q 200 355, 225 355 L 280 355"
-      stroke="#5B8FB9" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      d="M 175 170 L 175 345 Q 175 375, 205 375 L 290 375"
+      stroke="#5B8FB9" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none"
       opacity="0" filter="url(#glowL)"/>
 
     <!-- 4 endpoint dots (appear first as the "puzzle") -->
     <circle id="dotC1" cx="310" cy="90" r="0" fill="#E8785E"/>
     <circle id="dotC2" cx="310" cy="420" r="0" fill="#E8785E"/>
-    <circle id="dotL1" cx="200" cy="175" r="0" fill="#5B8FB9"/>
-    <circle id="dotL2" cx="280" cy="355" r="0" fill="#5B8FB9"/>
+    <circle id="dotL1" cx="175" cy="170" r="0" fill="#5B8FB9"/>
+    <circle id="dotL2" cx="290" cy="375" r="0" fill="#5B8FB9"/>
 
     <!-- C path (rounded rectangular, open right) -->
     <path id="pathC"
@@ -87,8 +87,8 @@
 
     <!-- L path (embedded inside C) -->
     <path id="pathL"
-      d="M 200 175 L 200 330 Q 200 355, 225 355 L 280 355"
-      stroke="#5B8FB9" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"
+      d="M 175 170 L 175 345 Q 175 375, 205 375 L 290 375"
+      stroke="#5B8FB9" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none"
       stroke-dasharray="0" stroke-dashoffset="0" opacity="0"/>
   </svg>
 
@@ -220,8 +220,8 @@
   // PHASE 1: Dots appear
   popDot(dotC1, 32, 300);
   popDot(dotC2, 32, 550);
-  popDot(dotL1, 24, 800);
-  popDot(dotL2, 24, 1000);
+  popDot(dotL1, 29, 800);
+  popDot(dotL2, 29, 1000);
 
   // PHASE 2: C path draws
   drawPath(pathC, 1300, 1000);
@@ -233,8 +233,8 @@
   setTimeout(() => {
     // Dot pulse
     [dotC1, dotC2, dotL1, dotL2].forEach((d, i) => {
-      const baseR = i < 2 ? 32 : 24;
-      const pulseR = i < 2 ? 38 : 29;
+      const baseR = i < 2 ? 32 : 29;
+      const pulseR = i < 2 ? 38 : 35;
 
       d.style.transition = 'r 0.2s ease-out';
       d.setAttribute('r', pulseR);
