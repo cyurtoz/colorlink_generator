@@ -7,9 +7,9 @@
   <circle cx="310" cy="90" r="32" fill="#E8785E"/>
   <circle cx="310" cy="420" r="32" fill="#E8785E"/>
 
-  <!-- L: tight inside C, near-equal weight -->
-  <path d="M 175 170 L 175 345 Q 175 375, 205 375 L 290 375"
+  <!-- L: inside C, equal gap on left and bottom edges -->
+  <path d="M 150 170 L 150 320 Q 150 350, 180 350 L 275 350"
     stroke="#5B8FB9" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="175" cy="170" r="29" fill="#5B8FB9"/>
-  <circle cx="290" cy="375" r="29" fill="#5B8FB9"/>
+  <circle cx="150" cy="170" r="29" fill="#5B8FB9"/>
+  <circle cx="275" cy="350" r="29" fill="#5B8FB9"/>
 </svg>
